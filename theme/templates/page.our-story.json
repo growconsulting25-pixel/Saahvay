@@ -1,0 +1,70 @@
+{
+  "sections": {
+    "intro": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption": { "type": "caption", "settings": { "caption": "Our story", "text_style": "caption-with-letter-spacing", "text_size": "small" } },
+        "heading": { "type": "heading", "settings": { "heading": "We built the store we wanted to shop in.", "heading_size": "h0" } },
+        "text": { "type": "text", "settings": { "text": "<p>SaahVay started with a familiar frustration: a screen full of clothes and no way to tell which of them would work on you. Size charts answer whether something will close. They do not answer whether it will look the way you hoped.</p><p>So every piece here is selected for specific body shapes and says so. Complete outfits take the guesswork out of what goes with what. Fit notes are honest, model sizes are listed, and nothing on this site is ever called a flaw.</p>", "text_style": "body" } }
+      },
+      "block_order": ["caption", "heading", "text"],
+      "settings": {
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "pillars": {
+      "type": "multicolumn",
+      "blocks": {
+        "p1": { "type": "column", "settings": { "title": "Chosen for your shape", "text": "<p>Every product names the shapes it is selected for and gives a one-line reason. That is the promise the store is built on.</p>" } },
+        "p2": { "type": "column", "settings": { "title": "Outfits, not just items", "text": "<p>Complete combinations remove the hardest part of shopping: deciding what goes with what.</p>" } },
+        "p3": { "type": "column", "settings": { "title": "Honest fit", "text": "<p>Real measurements, model sizes, plain language about fabric and stretch, and a returns policy stated the way it actually works.</p>" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "title": "What we stand behind",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "vision": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "We want getting dressed to be the easy part of your day.", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>Whether you are heading into a meeting, a school run, or a weekend that is finally yours, you should be able to open SaahVay, find what suits you in minutes, and feel like yourself in it.</p>" } },
+        "button": { "type": "button", "settings": { "button_label": "Find my shape", "button_link": "shopify:\/\/pages\/fit-quiz", "button_style_secondary": false, "button_label_2": "Shop by shape", "button_link_2": "shopify:\/\/pages\/shop-by-shape", "button_style_secondary_2": true } }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["intro", "pillars", "vision"]
+}

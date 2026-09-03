@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "quiz": {
+      "type": "fit-quiz",
+      "settings": {
+        "heading": "Find your shape in 60 seconds",
+        "text": "Six quick questions, no measuring tape. You'll get your shape, what tends to work, and pieces selected for it.",
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["quiz"]
+}

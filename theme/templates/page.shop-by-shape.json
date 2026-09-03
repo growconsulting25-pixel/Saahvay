@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "shape_cards": {
+      "type": "shape-cards",
+      "blocks": {
+        "h": { "type": "shape", "settings": { "letter": "H" } },
+        "o": { "type": "shape", "settings": { "letter": "O" } },
+        "v": { "type": "shape", "settings": { "letter": "V" } },
+        "x": { "type": "shape", "settings": { "letter": "X" } },
+        "a": { "type": "shape", "settings": { "letter": "A" } }
+      },
+      "block_order": ["h", "o", "v", "x", "a"],
+      "settings": {
+        "heading": "Shop by shape",
+        "heading_tag": "h1",
+        "heading_size": "h0",
+        "text": "Body shape is about proportion, not size. Pick the shape that sounds most like you to see pieces and complete looks selected for it.",
+        "center_header": true,
+        "show_quiz_link": true,
+        "quiz_page": "fit-quiz",
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 72
+      }
+    },
+    "explainer": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": { "type": "caption", "settings": { "caption": "Shape, not size", "text_style": "caption-with-letter-spacing", "text_size": "small" } },
+        "heading": { "type": "heading", "settings": { "heading": "Your shape is how you are proportioned. Your size is what you buy.", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>Two women can wear the same size and suit very different cuts. Shape looks at where your shoulders, waist, and hips sit relative to each other, and that is what decides whether a wrap dress, a straight trouser, or an A-line skirt will look the way you want. On SaahVay, every product carries the shapes it is selected for. You still choose your normal size on the product page.</p>" } },
+        "button": { "type": "button", "settings": { "button_label": "Take the 60-second quiz", "button_link": "shopify:\/\/pages\/fit-quiz", "button_style_secondary": false, "button_label_2": "Fit and sizing guide", "button_link_2": "shopify:\/\/pages\/fit-and-sizing", "button_style_secondary_2": true } }
+      },
+      "block_order": ["caption", "heading", "text", "button"],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": ["shape_cards", "explainer"]
+}

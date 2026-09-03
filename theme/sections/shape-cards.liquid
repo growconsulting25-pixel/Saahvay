@@ -1,0 +1,239 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="sv-section__header{% if section.settings.center_header %} sv-section__header--center{% endif %}">
+        {%- if section.settings.heading != blank -%}
+          <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">{{ section.settings.heading }}</{{ section.settings.heading_tag }}>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p>{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul class="shape-cards__grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign letter = block.settings.letter
+          assign letter_down = letter | downcase
+          assign base = 'saahvay.shapes.' | append: letter_down
+          assign name_key = base | append: '.name'
+          assign common_key = base | append: '.common'
+          assign descriptor_key = base | append: '.descriptor'
+          assign handle = 'shape-' | append: letter_down
+          assign target = block.settings.collection
+          if target == blank
+            assign target = collections[handle]
+          endif
+          assign url = target.url | default: routes.collections_url
+          assign image = block.settings.image
+          if image == blank and target.image != blank
+            assign image = target.image
+          endif
+          assign descriptor = block.settings.descriptor
+          if descriptor == blank
+            assign descriptor = descriptor_key | t
+          endif
+          assign alt_text = image.alt
+          if alt_text == blank
+            assign alt_text = name_key | t
+          endif
+        -%}
+        <li class="shape-card" {{ block.shopify_attributes }}>
+          <div class="shape-card__media">
+            {%- if image != blank -%}
+              {{
+                image
+                | image_url: width: 900
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '360, 540, 720, 900',
+                  sizes: '(min-width: 990px) 20vw, (min-width: 750px) 33vw, 76vw',
+                  alt: alt_text
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            <span class="shape-card__letter" aria-hidden="true">{{ letter }}</span>
+          </div>
+          <div class="shape-card__body">
+            <span class="shape-card__common">{{ common_key | t }}</span>
+            <h3 class="shape-card__name">
+              <a href="{{ url }}">{{ name_key | t }}</a>
+            </h3>
+            <p class="shape-card__descriptor">{{ descriptor }}</p>
+            <a class="button" href="{{ url }}" tabindex="-1" aria-hidden="true">
+              {{- 'saahvay.labels.shop_shape' | t: letter: letter -}}
+            </a>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.show_quiz_link and section.settings.quiz_page != blank -%}
+      <p class="shape-cards__quiz">
+        {{ 'saahvay.labels.not_sure' | t }}
+        <a class="link" href="{{ section.settings.quiz_page.url }}">{{ 'saahvay.labels.take_quiz' | t }}</a>
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shape cards",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Show us your shape. We'll show you what works.",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        { "value": "h1", "label": "H1 (use once per page)" },
+        { "value": "h2", "label": "H2" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Five shapes, one starting point. Pick the one that sounds most like you, or let the quiz decide.",
+      "label": "Supporting text"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_header",
+      "default": true,
+      "label": "Center the heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quiz_link",
+      "default": true,
+      "label": "Show the fit quiz link"
+    },
+    {
+      "type": "page",
+      "id": "quiz_page",
+      "label": "Fit quiz page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "shape",
+      "name": "Shape",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "select",
+          "id": "letter",
+          "label": "Shape",
+          "options": [
+            { "value": "H", "label": "H (Rectangle)" },
+            { "value": "O", "label": "O (Apple)" },
+            { "value": "V", "label": "V (Inverted Triangle)" },
+            { "value": "X", "label": "X (Hourglass)" },
+            { "value": "A", "label": "A (Pear)" }
+          ],
+          "default": "H"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "4:5 ratio. Falls back to the collection image."
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Leave empty to use the collection with handle shape-h, shape-o, shape-v, shape-x, or shape-a."
+        },
+        {
+          "type": "text",
+          "id": "descriptor",
+          "label": "Descriptor",
+          "info": "Leave empty to use the default copy from the theme locale file."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shape cards",
+      "blocks": [
+        { "type": "shape", "settings": { "letter": "H" } },
+        { "type": "shape", "settings": { "letter": "O" } },
+        { "type": "shape", "settings": { "letter": "V" } },
+        { "type": "shape", "settings": { "letter": "X" } },
+        { "type": "shape", "settings": { "letter": "A" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

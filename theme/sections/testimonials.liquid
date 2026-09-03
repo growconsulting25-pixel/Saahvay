@@ -1,0 +1,135 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width section-{{ section.id }}-padding">
+      <div class="sv-section__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+      <ul class="testimonials__grid" role="list">
+        {%- for block in section.blocks -%}
+          <li class="testimonial" {{ block.shopify_attributes }}>
+            <blockquote class="testimonial__quote">{{ block.settings.quote | escape }}</blockquote>
+            <div class="testimonial__meta">
+              {%- if block.settings.shape != blank -%}
+                <span class="sv-chip" title="{{ 'saahvay.labels.selected_for' | t }}">{{ block.settings.shape }}</span>
+              {%- endif -%}
+              <span>{{ block.settings.name | escape }}</span>
+              {%- if block.settings.verified -%}
+                <span class="sv-label">{{ 'saahvay.labels.verified' | t }}</span>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Use only real, permissioned customer quotes. The section renders nothing until at least one quote is added."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "What customers say about the fit",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "limit": 6,
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "name", "label": "Customer name (first name and initial)" },
+        {
+          "type": "select",
+          "id": "shape",
+          "label": "Customer's shape",
+          "options": [
+            { "value": "", "label": "Not shown" },
+            { "value": "H", "label": "H" },
+            { "value": "O", "label": "O" },
+            { "value": "V", "label": "V" },
+            { "value": "X", "label": "X" },
+            { "value": "A", "label": "A" }
+          ],
+          "default": ""
+        },
+        { "type": "checkbox", "id": "verified", "label": "Verified purchase", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials"
+    }
+  ]
+}
+{% endschema %}

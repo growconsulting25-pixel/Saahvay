@@ -1,0 +1,219 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Style that understands your shape.",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Thoughtfully selected pieces and complete outfits, chosen for your body shape so you can shop with confidence in minutes.",
+            "text_style": "body"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Find my fit",
+            "button_link_1": "shopify:\/\/pages\/fit-quiz",
+            "button_style_secondary_1": false,
+            "button_label_2": "Shop new arrivals",
+            "button_link_2": "shopify:\/\/collections\/new-arrivals",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "buttons"],
+      "settings": {
+        "image_overlay_opacity": 10,
+        "image_height": "large",
+        "desktop_content_position": "middle-left",
+        "show_text_box": false,
+        "image_behavior": "none",
+        "desktop_content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "mobile_content_alignment": "left",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "shape_cards": {
+      "type": "shape-cards",
+      "blocks": {
+        "h": { "type": "shape", "settings": { "letter": "H" } },
+        "o": { "type": "shape", "settings": { "letter": "O" } },
+        "v": { "type": "shape", "settings": { "letter": "V" } },
+        "x": { "type": "shape", "settings": { "letter": "X" } },
+        "a": { "type": "shape", "settings": { "letter": "A" } }
+      },
+      "block_order": ["h", "o", "v", "x", "a"],
+      "settings": {
+        "heading": "Show us your shape. We'll show you what works.",
+        "heading_tag": "h2",
+        "heading_size": "h1",
+        "text": "Five shapes, one starting point. Pick the one that sounds most like you, or let the quiz decide.",
+        "center_header": true,
+        "show_quiz_link": true,
+        "quiz_page": "fit-quiz",
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "outfits": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Complete looks, ready to wear",
+        "heading_size": "h1",
+        "description": "Whole outfits in your sizes, one click to add. Each look names the shapes it is selected for.",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "outfits",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": true,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "padding_top": 72,
+        "padding_bottom": 36
+      }
+    },
+    "new_arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "New this week",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "new-arrivals",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": true,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 72
+      }
+    },
+    "how_it_works": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_1": { "type": "step", "settings": { "title": "Discover your shape", "text": "Pick your shape or take the 60-second quiz. No measurements needed.", "link_label": "Take the quiz", "link": "shopify:\/\/pages\/fit-quiz" } },
+        "step_2": { "type": "step", "settings": { "title": "Explore selected styles", "text": "Every piece names the shapes it is selected for and why the cut works.", "link_label": "Shop by shape", "link": "shopify:\/\/pages\/shop-by-shape" } },
+        "step_3": { "type": "step", "settings": { "title": "Build your look with confidence", "text": "Add a single piece or a complete outfit in your sizes, then check out securely with Shopify.", "link_label": "See complete looks", "link": "shopify:\/\/collections\/outfits" } }
+      },
+      "block_order": ["step_1", "step_2", "step_3"],
+      "settings": {
+        "heading": "How SaahVay works",
+        "heading_size": "h1",
+        "text": "Three steps from landing to a look you feel good in.",
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "story": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption": { "type": "caption", "settings": { "caption": "Why SaahVay exists", "text_style": "caption-with-letter-spacing", "text_size": "small" } },
+        "heading": { "type": "heading", "settings": { "heading": "A screen full of clothes and no way to tell what would work on you.", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>That is the frustration SaahVay was built to end. Every piece here is selected for specific body shapes and says so. Complete outfits take the guesswork out of what goes with what. Sizes are real, fit notes are honest, and nothing is ever called a flaw.</p>", "text_style": "body" } },
+        "button": { "type": "button", "settings": { "button_label": "Our story", "button_link": "shopify:\/\/pages\/our-story", "button_style_secondary": true } }
+      },
+      "block_order": ["caption", "heading", "text", "button"],
+      "settings": {
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "disabled": true,
+      "settings": {
+        "heading": "What customers say about the fit",
+        "heading_size": "h1",
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "shape": { "type": "item", "settings": { "icon": "shape", "title": "Chosen for your shape", "text": "Every piece names the shapes it is selected for", "link": "shopify:\/\/pages\/shop-by-shape" } },
+        "shipping": { "type": "item", "settings": { "icon": "truck", "title": "Shipping", "text": "See delivery times and costs", "link": "shopify:\/\/pages\/shipping" } },
+        "returns": { "type": "item", "settings": { "icon": "return", "title": "Returns", "text": "Read the returns policy", "link": "shopify:\/\/pages\/returns" } },
+        "secure": { "type": "item", "settings": { "icon": "lock", "title": "Secure checkout", "text": "Powered by Shopify", "link": "" } }
+      },
+      "block_order": ["shape", "shipping", "returns", "secure"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Get your personal shape guide", "heading_size": "h1" } },
+        "paragraph": { "type": "paragraph", "settings": { "text": "<p>Take the quiz and we'll send your shape guide: the cuts, lengths, and outfit ideas selected for you, plus early access to new pieces in your shape.</p>" } },
+        "email_form": { "type": "email_form" }
+      },
+      "block_order": ["heading", "paragraph", "email_form"],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "shape_cards",
+    "outfits",
+    "new_arrivals",
+    "how_it_works",
+    "story",
+    "testimonials",
+    "trust",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "fit_module": {
+          "type": "fit_module",
+          "settings": {
+            "heading": "Fit and shape",
+            "size_guide_page": "fit-and-sizing",
+            "quiz_page": "fit-quiz"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "square"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "description": { "type": "description" },
+        "fabric": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- assign fabric = product.metafields.saahvay.fabric_care -%}{%- if fabric != blank -%}<div class=\"product__accordion accordion quick-add-hidden\"><details id=\"Details-fabric-{{ section.id }}\"><summary><div class=\"summary__title\"><h2 class=\"h4 accordion__title inline-richtext\">Fabric and care</h2></div>{{ 'icon-caret.svg' | inline_asset_content }}</summary><div class=\"accordion__content rte\">{{ fabric | newline_to_br }}</div></details></div>{%- endif -%}"
+          }
+        },
+        "shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping and returns",
+            "icon": "none",
+            "content": "",
+            "page": "shipping-and-returns"
+          }
+        },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Wear it with",
+            "make_collapsible_row": false,
+            "icon": "none",
+            "product_list_limit": 4,
+            "products_per_page": 2,
+            "pagination_style": "counter",
+            "image_ratio": "portrait",
+            "enable_quick_add": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "fit_module",
+        "variant_picker",
+        "buy_buttons",
+        "description",
+        "fabric",
+        "shipping",
+        "complementary"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_position": "left",
+        "gallery_layout": "stacked",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 24,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 48,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": ["main", "related-products"]
+}

@@ -1,0 +1,63 @@
+{% comment %}
+  Product-page fit module. Reduces fit anxiety in one block:
+  - which shapes the piece is selected for (and also works for)
+  - why the cut works (metafield saahvay.why_it_works)
+  - fit notes and model info (metafields saahvay.fit_notes, saahvay.model_info)
+  - links to the size guide page and the fit quiz
+
+  Accepts:
+  - product: {Object}
+  - block: {Object} the section block (for shopify_attributes and settings)
+{% endcomment %}
+
+{%- liquid
+  assign why = product.metafields.saahvay.why_it_works | default: blank
+  assign notes = product.metafields.saahvay.fit_notes | default: blank
+  assign model = product.metafields.saahvay.model_info | default: blank
+  assign has_shapes = false
+  if product.metafields.saahvay.shapes_primary.value.size > 0 or product.metafields.saahvay.shapes_secondary.value.size > 0
+    assign has_shapes = true
+  endif
+  for tag in product.tags
+    if tag contains 'shape:'
+      assign has_shapes = true
+    endif
+  endfor
+-%}
+
+{%- if has_shapes or why != blank or notes != blank -%}
+  <div class="fit-module" {{ block.shopify_attributes }}>
+    <p class="fit-module__title">{{ block.settings.heading | default: 'saahvay.fit_module.heading' | t }}</p>
+
+    {% render 'shape-chips', product: product, context: 'full' %}
+
+    {%- if why != blank -%}
+      <p class="fit-module__why">{{ why | newline_to_br }}</p>
+    {%- endif -%}
+
+    {%- if notes != blank or model != blank -%}
+      <p class="fit-module__notes">
+        {%- if notes != blank -%}{{ notes | newline_to_br }}{%- endif -%}
+        {%- if notes != blank and model != blank %}<br>{% endif -%}
+        {%- if model != blank -%}{{ model }}{%- endif -%}
+      </p>
+    {%- endif -%}
+
+    <div class="fit-module__links">
+      {%- if block.settings.size_guide_page != blank -%}
+        <a class="link" href="{{ block.settings.size_guide_page.url }}">{{ 'saahvay.fit_module.size_guide' | t }}</a>
+      {%- endif -%}
+      {%- if block.settings.quiz_page != blank -%}
+        <a class="link" href="{{ block.settings.quiz_page.url }}">{{ 'saahvay.fit_module.find_shape' | t }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+{%- elsif block.settings.quiz_page != blank -%}
+  <div class="fit-module" {{ block.shopify_attributes }}>
+    <p class="fit-module__title">{{ block.settings.heading | default: 'saahvay.fit_module.heading' | t }}</p>
+    <p class="fit-module__notes">{{ 'saahvay.fit_module.no_data' | t }}</p>
+    <div class="fit-module__links">
+      <a class="link" href="{{ block.settings.quiz_page.url }}">{{ 'saahvay.fit_module.find_shape' | t }}</a>
+    </div>
+  </div>
+{%- endif -%}

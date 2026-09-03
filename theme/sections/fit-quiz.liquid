@@ -1,0 +1,306 @@
+{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'fit-quiz.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign letters = 'H,O,V,X,A' | split: ','
+  assign outfits_collection = section.settings.outfits_collection
+  if outfits_collection == blank
+    assign outfits_collection = collections['outfits']
+  endif
+-%}
+
+{%- capture figure_wider_shoulders -%}
+  <svg class="sv-tile__figure" viewBox="0 0 48 56" aria-hidden="true" focusable="false"><path d="M6 4h36l-8 48H14z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+{%- endcapture -%}
+{%- capture figure_equal -%}
+  <svg class="sv-tile__figure" viewBox="0 0 48 56" aria-hidden="true" focusable="false"><path d="M12 4h24v48H12z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+{%- endcapture -%}
+{%- capture figure_wider_hips -%}
+  <svg class="sv-tile__figure" viewBox="0 0 48 56" aria-hidden="true" focusable="false"><path d="M14 4h20l8 48H6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+{%- endcapture -%}
+{%- capture figure_waist -%}
+  <svg class="sv-tile__figure" viewBox="0 0 48 56" aria-hidden="true" focusable="false"><path d="M10 4h28l-8 24 8 24H10l8-24z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+{%- endcapture -%}
+{%- capture figure_middle -%}
+  <svg class="sv-tile__figure" viewBox="0 0 48 56" aria-hidden="true" focusable="false"><path d="M14 4h20l8 24-8 24H14L6 28z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+{%- endcapture -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    <fit-quiz class="fit-quiz">
+      <div class="sv-section__header sv-section__header--center">
+        <h1 class="h1">{{ section.settings.heading }}</h1>
+        {%- if section.settings.text != blank -%}
+          <p>{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="fit-quiz__progress" role="status" aria-live="polite">
+        <span class="fit-quiz__progress-text" data-template="{{ 'saahvay.quiz.progress' | t: current: '[current]', total: '[total]' }}"></span>
+        <div class="fit-quiz__bar" aria-hidden="true"><div class="fit-quiz__bar-fill"></div></div>
+      </div>
+
+      {%- comment -%} Question 1: shoulders vs hips {%- endcomment -%}
+      <section class="fit-quiz__step" aria-hidden="true">
+        <h2 class="h2 fit-quiz__question" tabindex="-1">{{ 'saahvay.quiz.q1.question' | t }}</h2>
+        <p class="fit-quiz__hint">{{ 'saahvay.quiz.q1.hint' | t }}</p>
+        <ul class="fit-quiz__options" role="list">
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="V:2">{{ figure_wider_shoulders }}<span>{{ 'saahvay.quiz.q1.a1' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="H:1,X:1">{{ figure_equal }}<span>{{ 'saahvay.quiz.q1.a2' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="A:2">{{ figure_wider_hips }}<span>{{ 'saahvay.quiz.q1.a3' | t }}</span></button></li>
+        </ul>
+        <div class="fit-quiz__nav"><span></span><a class="link" href="{{ routes.collections_url }}">{{ 'saahvay.quiz.skip' | t }}</a></div>
+      </section>
+
+      {%- comment -%} Question 2: waist {%- endcomment -%}
+      <section class="fit-quiz__step" aria-hidden="true">
+        <h2 class="h2 fit-quiz__question" tabindex="-1">{{ 'saahvay.quiz.q2.question' | t }}</h2>
+        <p class="fit-quiz__hint">{{ 'saahvay.quiz.q2.hint' | t }}</p>
+        <ul class="fit-quiz__options" role="list">
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="X:2,A:1">{{ figure_waist }}<span>{{ 'saahvay.quiz.q2.a1' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="H:2">{{ figure_equal }}<span>{{ 'saahvay.quiz.q2.a2' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="O:2">{{ figure_middle }}<span>{{ 'saahvay.quiz.q2.a3' | t }}</span></button></li>
+        </ul>
+        <div class="fit-quiz__nav"><button type="button" class="link" data-quiz-back>{{ 'saahvay.quiz.back' | t }}</button><span></span></div>
+      </section>
+
+      {%- comment -%} Question 3: where fullness sits {%- endcomment -%}
+      <section class="fit-quiz__step" aria-hidden="true">
+        <h2 class="h2 fit-quiz__question" tabindex="-1">{{ 'saahvay.quiz.q3.question' | t }}</h2>
+        <p class="fit-quiz__hint">{{ 'saahvay.quiz.q3.hint' | t }}</p>
+        <ul class="fit-quiz__options" role="list">
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="O:2">{{ figure_middle }}<span>{{ 'saahvay.quiz.q3.a1' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="A:2">{{ figure_wider_hips }}<span>{{ 'saahvay.quiz.q3.a2' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="V:2">{{ figure_wider_shoulders }}<span>{{ 'saahvay.quiz.q3.a3' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="X:1,H:1">{{ figure_equal }}<span>{{ 'saahvay.quiz.q3.a4' | t }}</span></button></li>
+        </ul>
+        <div class="fit-quiz__nav"><button type="button" class="link" data-quiz-back>{{ 'saahvay.quiz.back' | t }}</button><span></span></div>
+      </section>
+
+      {%- comment -%} Question 4: bust vs hips {%- endcomment -%}
+      <section class="fit-quiz__step" aria-hidden="true">
+        <h2 class="h2 fit-quiz__question" tabindex="-1">{{ 'saahvay.quiz.q4.question' | t }}</h2>
+        <p class="fit-quiz__hint">{{ 'saahvay.quiz.q4.hint' | t }}</p>
+        <ul class="fit-quiz__options" role="list">
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="V:1,O:1">{{ figure_wider_shoulders }}<span>{{ 'saahvay.quiz.q4.a1' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="X:1,H:1">{{ figure_equal }}<span>{{ 'saahvay.quiz.q4.a2' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="A:1">{{ figure_wider_hips }}<span>{{ 'saahvay.quiz.q4.a3' | t }}</span></button></li>
+        </ul>
+        <div class="fit-quiz__nav"><button type="button" class="link" data-quiz-back>{{ 'saahvay.quiz.back' | t }}</button><span></span></div>
+      </section>
+
+      {%- comment -%} Question 5: what happens when clothes fit one part {%- endcomment -%}
+      <section class="fit-quiz__step" aria-hidden="true">
+        <h2 class="h2 fit-quiz__question" tabindex="-1">{{ 'saahvay.quiz.q5.question' | t }}</h2>
+        <p class="fit-quiz__hint">{{ 'saahvay.quiz.q5.hint' | t }}</p>
+        <ul class="fit-quiz__options" role="list">
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="A:2">{{ figure_wider_hips }}<span>{{ 'saahvay.quiz.q5.a1' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="X:2">{{ figure_waist }}<span>{{ 'saahvay.quiz.q5.a2' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="O:2">{{ figure_middle }}<span>{{ 'saahvay.quiz.q5.a3' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="V:2">{{ figure_wider_shoulders }}<span>{{ 'saahvay.quiz.q5.a4' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="H:2">{{ figure_equal }}<span>{{ 'saahvay.quiz.q5.a5' | t }}</span></button></li>
+        </ul>
+        <div class="fit-quiz__nav"><button type="button" class="link" data-quiz-back>{{ 'saahvay.quiz.back' | t }}</button><span></span></div>
+      </section>
+
+      {%- comment -%} Question 6: a dress with no waist definition {%- endcomment -%}
+      <section class="fit-quiz__step" aria-hidden="true">
+        <h2 class="h2 fit-quiz__question" tabindex="-1">{{ 'saahvay.quiz.q6.question' | t }}</h2>
+        <p class="fit-quiz__hint">{{ 'saahvay.quiz.q6.hint' | t }}</p>
+        <ul class="fit-quiz__options" role="list">
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="H:1">{{ figure_equal }}<span>{{ 'saahvay.quiz.q6.a1' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="X:1">{{ figure_waist }}<span>{{ 'saahvay.quiz.q6.a2' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="V:1">{{ figure_wider_shoulders }}<span>{{ 'saahvay.quiz.q6.a3' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="A:1">{{ figure_wider_hips }}<span>{{ 'saahvay.quiz.q6.a4' | t }}</span></button></li>
+          <li><button type="button" class="sv-tile" aria-pressed="false" data-scores="O:1">{{ figure_middle }}<span>{{ 'saahvay.quiz.q6.a5' | t }}</span></button></li>
+        </ul>
+        <div class="fit-quiz__nav"><button type="button" class="link" data-quiz-back>{{ 'saahvay.quiz.back' | t }}</button><span></span></div>
+      </section>
+
+      {%- comment -%} Result {%- endcomment -%}
+      <div class="fit-quiz__result" aria-hidden="true" aria-live="polite">
+        {%- for letter in letters -%}
+          {%- liquid
+            assign letter_down = letter | downcase
+            assign base = 'saahvay.shapes.' | append: letter_down
+            assign name_key = base | append: '.name'
+            assign common_key = base | append: '.common'
+            assign descriptor_key = base | append: '.descriptor'
+            assign p1_key = base | append: '.principle_1'
+            assign p2_key = base | append: '.principle_2'
+            assign p3_key = base | append: '.principle_3'
+            assign handle = 'shape-' | append: letter_down
+            assign target = collections[handle]
+            assign outfits_url = ''
+            if outfits_collection != blank
+              assign outfits_url = outfits_collection.url | append: '?filter.p.m.saahvay.shapes_primary=' | append: letter
+            endif
+          -%}
+          <div data-shape-panel="{{ letter }}" data-shape-name="{{ name_key | t | escape }}" hidden>
+            <div class="quiz-result__hero">
+              <span class="quiz-result__mark" aria-hidden="true">{{ letter }}</span>
+              <div>
+                <p class="sv-label quiz-result__eyebrow">{{ 'saahvay.quiz.your_shape' | t }}</p>
+                <h2 class="h1 quiz-result__name" tabindex="-1">{{ name_key | t }}, <span class="light">{{ 'saahvay.labels.the' | t }} {{ common_key | t }}</span></h2>
+                <p class="quiz-result__descriptor">{{ descriptor_key | t }}</p>
+                <p class="quiz-result__runner-up" data-runner-up data-template="{{ 'saahvay.quiz.runner_up' | t: shape: '[shape]' }}" hidden></p>
+                <div class="quiz-result__actions">
+                  {%- if target != blank -%}
+                    <a class="button" href="{{ target.url }}">{{ 'saahvay.labels.shop_shape' | t: letter: letter }}</a>
+                  {%- endif -%}
+                  {%- if outfits_url != '' -%}
+                    <a class="button button--secondary" href="{{ outfits_url }}">{{ 'saahvay.labels.see_looks' | t }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+            <div class="quiz-result__principles">
+              <h2 class="h2">{{ 'saahvay.quiz.what_works' | t: shape: letter }}</h2>
+              <ul class="shape-guide__principles">
+                <li>{{ p1_key | t }}</li>
+                <li>{{ p2_key | t }}</li>
+                <li>{{ p3_key | t }}</li>
+              </ul>
+            </div>
+
+            {%- if target != blank -%}
+              <div class="quiz-result__products">
+                <h2 class="h2">{{ 'saahvay.quiz.selected_for' | t: shape: letter }}</h2>
+                <div data-shape-products data-url="{{ target.url }}?section_id=shape-products"></div>
+                <a class="link" href="{{ target.url }}">{{ 'saahvay.labels.see_all_shape' | t: letter: letter }}</a>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+
+        <div class="quiz-result__save">
+          <h2>{{ 'saahvay.quiz.save_heading' | t }}</h2>
+          <p>{{ 'saahvay.quiz.save_text' | t }}</p>
+          {%- form 'customer', class: 'newsletter-form', id: 'QuizResultForm' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter,quiz">
+            <div class="newsletter-form__field-wrapper">
+              <div class="field">
+                <input
+                  id="QuizResultEmail"
+                  type="email"
+                  name="contact[email]"
+                  class="field__input"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  placeholder="{{ 'newsletter.label' | t }}"
+                  required
+                >
+                <label class="field__label" for="QuizResultEmail">{{ 'newsletter.label' | t }}</label>
+                <button type="submit" class="newsletter-form__button field__button" name="commit" aria-label="{{ 'saahvay.quiz.save_button' | t }}">
+                  <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                </button>
+              </div>
+              {%- if form.errors -%}
+                <small class="newsletter-form__message form__message">
+                  <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
+                  {{- form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
+            </div>
+            {%- if form.posted_successfully? -%}
+              <p class="newsletter-form__message newsletter-form__message--success form__message" tabindex="-1" autofocus>
+                <span class="svg-wrapper">{{- 'icon-success.svg' | inline_asset_content -}}</span>
+                {{- 'saahvay.quiz.save_success' | t }}
+              </p>
+            {%- endif -%}
+          {%- endform -%}
+          <div class="fit-quiz__nav" style="margin-top: 1.6rem;">
+            <label class="visually-hidden" for="QuizResultLink">{{ 'saahvay.quiz.result_link' | t }}</label>
+            <input id="QuizResultLink" class="field__input" type="text" readonly data-result-link value="" aria-label="{{ 'saahvay.quiz.result_link' | t }}">
+            <button type="button" class="link" data-quiz-restart>{{ 'saahvay.quiz.restart' | t }}</button>
+          </div>
+        </div>
+      </div>
+    </fit-quiz>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Fit quiz",
+  "tag": "section",
+  "class": "section",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Find your shape in 60 seconds",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Six quick questions, no measuring tape. You'll get your shape, what tends to work, and pieces selected for it.",
+      "label": "Supporting text"
+    },
+    {
+      "type": "collection",
+      "id": "outfits_collection",
+      "label": "Outfits collection",
+      "info": "Used for the 'See complete looks' button. Defaults to the collection with handle 'outfits'."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fit quiz"
+    }
+  ]
+}
+{% endschema %}

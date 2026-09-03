@@ -1,0 +1,182 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign letters = 'H,O,V,X,A' | split: ','
+  assign letter = collection.metafields.saahvay.shape_letter | upcase | strip
+  if letter == blank
+    assign letter = collection.handle | remove: 'shape-' | upcase
+  endif
+  assign letter_down = letter | downcase
+  assign base = 'saahvay.shapes.' | append: letter_down
+  assign common_key = base | append: '.common'
+  assign descriptor_key = base | append: '.descriptor'
+
+  assign intro = collection.metafields.saahvay.guide_intro
+  if intro == blank
+    assign intro = descriptor_key | t
+  endif
+
+  assign principles = collection.metafields.saahvay.principles.value
+  if principles == blank
+    assign p1 = base | append: '.principle_1' | t
+    assign p2 = base | append: '.principle_2' | t
+    assign p3 = base | append: '.principle_3' | t
+    assign principles = p1 | append: '|' | append: p2 | append: '|' | append: p3 | split: '|'
+  endif
+
+  assign outfits = collection.metafields.saahvay.outfits_collection.value
+  if outfits == blank
+    assign outfits_handle = 'outfits-shape-' | append: letter_down
+    assign outfits = collections[outfits_handle]
+  endif
+-%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="shape-guide">
+      <div>
+        <div class="shape-guide__eyebrow">
+          <span class="shape-guide__mark" aria-hidden="true">{{ letter }}</span>
+          <span class="sv-label">{{ common_key | t }}</span>
+        </div>
+        <h1 class="h1 shape-guide__title">{{ collection.title | escape }}</h1>
+        <div class="shape-guide__descriptor">{{ intro }}</div>
+        <ul class="shape-guide__principles">
+          {%- for principle in principles -%}
+            <li>{{ principle }}</li>
+          {%- endfor -%}
+        </ul>
+        {%- if collection.description != blank and section.settings.show_full_guide -%}
+          <details class="shape-guide__full">
+            <summary>
+              {{ 'saahvay.labels.read_full_guide' | t }}
+              <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+            </summary>
+            <div class="rte" style="margin-top: 1.6rem;">{{ collection.description }}</div>
+          </details>
+        {%- endif -%}
+      </div>
+
+      <aside class="shape-guide__aside" aria-label="{{ 'saahvay.labels.change_shape' | t }}">
+        <h2>{{ 'saahvay.labels.not_your_shape' | t }}</h2>
+        <p style="margin:0;">{{ 'saahvay.labels.switch_or_quiz' | t }}</p>
+        <div class="shape-guide__switch">
+          {%- for other in letters -%}
+            {%- liquid
+              assign other_down = other | downcase
+              assign other_handle = 'shape-' | append: other_down
+              assign other_name_key = 'saahvay.shapes.' | append: other_down | append: '.name'
+            -%}
+            {%- if collections[other_handle] != blank -%}
+              <a href="{{ collections[other_handle].url }}" {% if other == letter %}aria-current="page"{% endif %} title="{{ other_name_key | t }}">
+                {{ other }}<span class="visually-hidden"> {{ other_name_key | t }}</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.quiz_page != blank -%}
+          <a class="button button--secondary" href="{{ section.settings.quiz_page.url }}">{{ 'saahvay.labels.take_quiz' | t }}</a>
+        {%- endif -%}
+      </aside>
+    </div>
+
+    {%- if section.settings.show_outfits and outfits != blank and outfits.products.size > 0 -%}
+      <div style="margin-top: 4.8rem;">
+        <div class="sv-section__header">
+          <h2 class="h2">{{ 'saahvay.labels.looks_for_shape' | t: letter: letter }}</h2>
+        </div>
+        <ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop" role="list">
+          {%- for product in outfits.products limit: 4 -%}
+            <li class="grid__item">
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: 'portrait',
+                show_secondary_image: true,
+                section_id: section.id
+              %}
+            </li>
+          {%- endfor -%}
+        </ul>
+        <p style="margin: 1.6rem 0 0;"><a class="link" href="{{ outfits.url }}">{{ 'saahvay.labels.see_all_looks' | t }}</a></p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shape guide",
+  "tag": "section",
+  "class": "section",
+  "limit": 1,
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads the collection's shape letter from the metafield saahvay.shape_letter, or from a handle of the form shape-a. Intro and principles come from saahvay.guide_intro and saahvay.principles, with defaults from the theme's locale file."
+    },
+    {
+      "type": "page",
+      "id": "quiz_page",
+      "label": "Fit quiz page"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_full_guide",
+      "default": true,
+      "label": "Show 'Read the full guide' using the collection description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_outfits",
+      "default": true,
+      "label": "Show complete looks for this shape",
+      "info": "Uses the collection metafield saahvay.outfits_collection, or a collection with handle outfits-shape-a."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 48
+    }
+  ]
+}
+{% endschema %}

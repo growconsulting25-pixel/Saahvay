@@ -1,0 +1,168 @@
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'outfit-builder.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign pieces = product.metafields.saahvay.outfit_products.value
+-%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- if pieces != blank and pieces.size > 0 -%}
+      <div class="sv-section__header">
+        <h2 class="h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+      </div>
+
+      <outfit-builder
+        class="outfit"
+        data-money-format="{{ shop.money_format | escape }}"
+        data-unavailable-message="{{ 'saahvay.outfit.unavailable' | t | escape }}"
+        data-error-message="{{ 'saahvay.outfit.error' | t | escape }}"
+      >
+        <ul class="outfit__items" role="list">
+          {%- for piece in pieces -%}
+            {%- liquid
+              assign first_available = piece.selected_or_first_available_variant
+            -%}
+            <li
+              class="outfit-item"
+              data-included="true"
+              data-variant-id="{{ first_available.id }}"
+              data-price="{{ first_available.price }}"
+              data-available="{{ first_available.available }}"
+            >
+              <a class="outfit-item__media" href="{{ piece.url }}" tabindex="-1" aria-hidden="true">
+                {%- if piece.featured_media != blank -%}
+                  {{
+                    piece.featured_media
+                    | image_url: width: 440
+                    | image_tag: loading: 'lazy', widths: '220, 440', sizes: '11rem', alt: piece.featured_media.alt
+                  }}
+                {%- else -%}
+                  {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </a>
+              <div class="outfit-item__body">
+                <h3 class="outfit-item__title"><a href="{{ piece.url }}">{{ piece.title | escape }}</a></h3>
+                {% render 'shape-chips', product: piece, context: 'card' %}
+                {% render 'price', product: piece, use_variant: true, show_compare_at_price: true %}
+                <div class="outfit-item__controls">
+                  {%- unless piece.has_only_default_variant -%}
+                    <label class="visually-hidden" for="OutfitSize-{{ section.id }}-{{ piece.id }}">{{ 'saahvay.outfit.size_for' | t: product: piece.title }}</label>
+                    <select class="outfit-item__select" id="OutfitSize-{{ section.id }}-{{ piece.id }}">
+                      {%- for variant in piece.variants -%}
+                        <option
+                          value="{{ variant.id }}"
+                          data-price="{{ variant.price }}"
+                          data-available="{{ variant.available }}"
+                          {% if variant.id == first_available.id %}selected{% endif %}
+                          {% unless variant.available %}disabled{% endunless %}
+                        >
+                          {{ variant.title | escape }}{% unless variant.available %} ({{ 'products.product.sold_out' | t }}){% endunless %}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  {%- endunless -%}
+                  <label class="outfit-item__toggle">
+                    <input type="checkbox" checked>
+                    <span>{{ 'saahvay.outfit.include' | t }}</span>
+                  </label>
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="outfit__summary">
+          <h2>{{ 'saahvay.outfit.summary_heading' | t }}</h2>
+          <p class="outfit__count" data-outfit-count data-template="{{ 'saahvay.outfit.count' | t: count: '[count]' }}"></p>
+          <div class="outfit__total">
+            <span>{{ 'saahvay.outfit.total' | t }}</span>
+            <span data-outfit-total></span>
+          </div>
+          <button type="button" class="button" data-outfit-submit>
+            <span>{{ 'saahvay.outfit.add_all' | t }}</span>
+            {%- render 'loading-spinner' -%}
+          </button>
+          <p class="outfit__error" data-outfit-error role="alert"></p>
+        </div>
+      </outfit-builder>
+    {%- else -%}
+      <p>{{ 'saahvay.outfit.empty' | t }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Outfit builder",
+  "tag": "section",
+  "class": "section",
+  "limit": 1,
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Lists the pieces from the product metafield saahvay.outfit_products (list of products). Customers choose a size per piece, drop pieces, and add the rest in one click."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Build this look",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Choose your size for each piece. Untick anything you already own.",
+      "label": "Supporting text"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ]
+}
+{% endschema %}

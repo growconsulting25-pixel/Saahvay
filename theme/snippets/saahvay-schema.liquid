@@ -1,0 +1,73 @@
+{% comment %}
+  Site-level structured data: Organization, WebSite (with SearchAction), and BreadcrumbList.
+  Product and Article JSON-LD are emitted by Dawn's own sections, so they are not repeated here.
+  Review schema is deliberately absent until genuine reviews exist.
+{% endcomment %}
+
+{%- liquid
+  assign logo_url = ''
+  if settings.logo != blank
+    assign logo_url = settings.logo | image_url: width: 600
+  endif
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ shop.url }}/#organization",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }},
+      {%- if logo_url != '' -%}
+      "logo": {{ logo_url | prepend: 'https:' | json }},
+      {%- endif -%}
+      "sameAs": [
+        {%- assign socials = '' -%}
+        {%- if settings.social_instagram_link != blank -%}{{ settings.social_instagram_link | json }}{%- assign socials = 'x' -%}{%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}{%- if socials != '' %},{% endif -%}{{ settings.social_facebook_link | json }}{%- assign socials = 'x' -%}{%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}{%- if socials != '' %},{% endif -%}{{ settings.social_tiktok_link | json }}{%- assign socials = 'x' -%}{%- endif -%}
+        {%- if settings.social_pinterest_link != blank -%}{%- if socials != '' %},{% endif -%}{{ settings.social_pinterest_link | json }}{%- endif -%}
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ shop.url }}/#website",
+      "url": {{ shop.url | json }},
+      "name": {{ shop.name | json }},
+      "publisher": { "@id": "{{ shop.url }}/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ shop.url }}{{ routes.search_url }}?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    {%- if template.name == 'collection' and collection != blank -%}
+    ,{
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ 'saahvay.labels.home' | t | json }}, "item": {{ shop.url | json }} },
+        { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ shop.url | append: collection.url | json }} }
+      ]
+    }
+    {%- elsif template.name == 'product' and product != blank -%}
+    ,{
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ 'saahvay.labels.home' | t | json }}, "item": {{ shop.url | json }} },
+        {%- if collection != blank -%}
+        { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ shop.url | append: collection.url | json }} },
+        { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+        {%- else -%}
+        { "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+        {%- endif -%}
+      ]
+    }
+    {%- endif -%}
+  ]
+}
+</script>

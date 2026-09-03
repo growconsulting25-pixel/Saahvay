@@ -1,0 +1,80 @@
+{% comment %}
+  Renders the body-shape chips for a product.
+
+  Reads product.metafields.saahvay.shapes_primary (list of single-line text: H, O, V, X, A)
+  and product.metafields.saahvay.shapes_secondary. Falls back to tags of the form shape:H.
+
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  - context: {String} 'card' (compact, primary shapes only, max 3 + counter) or 'full' (all, with labels)
+
+  Usage:
+  {% render 'shape-chips', product: product, context: 'card' %}
+{% endcomment %}
+
+{%- liquid
+  assign primary = product.metafields.saahvay.shapes_primary.value
+  assign secondary = product.metafields.saahvay.shapes_secondary.value
+
+  if primary == blank
+    assign primary_from_tags = ''
+    for tag in product.tags
+      if tag contains 'shape:'
+        assign letter = tag | remove: 'shape:' | upcase | strip
+        assign primary_from_tags = primary_from_tags | append: letter | append: ','
+      endif
+    endfor
+    assign primary = primary_from_tags | split: ','
+  endif
+
+  assign primary_count = primary | size
+  assign secondary_count = secondary | size
+-%}
+
+{%- if primary_count > 0 or secondary_count > 0 -%}
+  {%- if context == 'card' -%}
+    <ul class="sv-chips sv-chips--card" aria-label="{{ 'saahvay.labels.selected_for' | t }}">
+      {%- for letter in primary limit: 3 -%}
+        {%- assign key = 'saahvay.shapes.' | append: letter | downcase | append: '.name' -%}
+        <li class="sv-chip" title="{{ key | t }}">
+          <span class="visually-hidden">{{ 'saahvay.labels.selected_for' | t }} </span>{{ letter | upcase }}
+        </li>
+      {%- endfor -%}
+      {%- if primary_count > 3 -%}
+        <li class="sv-chip sv-chip--more">+{{ primary_count | minus: 3 }}</li>
+      {%- endif -%}
+    </ul>
+  {%- else -%}
+    <div class="fit-module__row">
+      {%- if primary_count > 0 -%}
+        <span class="sv-chips__label">{{ 'saahvay.labels.selected_for' | t }}</span>
+        <ul class="sv-chips" role="list">
+          {%- for letter in primary -%}
+            {%- assign key = 'saahvay.shapes.' | append: letter | downcase | append: '.name' -%}
+            {%- assign handle = 'shape-' | append: letter | downcase -%}
+            <li>
+              <a class="sv-chip" href="{{ collections[handle].url | default: routes.collections_url }}" title="{{ key | t }}">
+                {{- letter | upcase -}}
+                <span class="visually-hidden"> {{ key | t }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    {%- if secondary_count > 0 -%}
+      <div class="fit-module__row">
+        <span class="sv-chips__label">{{ 'saahvay.labels.also_works_for' | t }}</span>
+        <ul class="sv-chips" role="list">
+          {%- for letter in secondary -%}
+            {%- assign key = 'saahvay.shapes.' | append: letter | downcase | append: '.name' -%}
+            <li class="sv-chip sv-chip--secondary" title="{{ key | t }}">
+              {{- letter | upcase -}}
+              <span class="visually-hidden"> {{ key | t }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
