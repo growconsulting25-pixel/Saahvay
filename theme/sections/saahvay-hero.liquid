@@ -1,0 +1,154 @@
+{%- comment -%}
+  SaahVay hero: one photograph edge to edge, the headline set on the quiet side of the frame.
+  Uses the merchant's image when one is picked; otherwise the bundled studio photograph in assets.
+{%- endcomment -%}
+
+{%- liquid
+  assign image = section.settings.image
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
+  assign heading_tag = 'h2'
+  if template.name == 'index' and section.settings.render_as_h1
+    assign heading_tag = 'h1'
+  endif
+  assign alt_text = section.settings.image_alt
+  if image != blank and image.alt != blank
+    assign alt_text = image.alt
+  endif
+-%}
+
+<section class="sv-hero sv-hero--focus-{{ section.settings.focal_point }} color-{{ section.settings.color_scheme }}">
+  <div class="sv-hero__media">
+    {%- if image != blank -%}
+      {{
+        image
+        | image_url: width: 2400
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: fetch_priority,
+          sizes: '100vw',
+          widths: '750, 1100, 1500, 1800, 2400',
+          class: 'sv-hero__img',
+          alt: alt_text
+      }}
+    {%- else -%}
+      <img
+        class="sv-hero__img"
+        src="{{ 'saahvay-hero.webp' | asset_url }}"
+        width="1800"
+        height="1013"
+        alt="{{ alt_text | escape }}"
+        fetchpriority="{{ fetch_priority }}"
+      >
+    {%- endif -%}
+  </div>
+  <div class="sv-hero__copy">
+    <div class="page-width">
+      <div class="sv-hero__box">
+        <{{ heading_tag }} class="sv-hero__heading">{{ section.settings.heading }}</{{ heading_tag }}>
+        {%- if section.settings.text != blank -%}
+          <p class="sv-hero__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank or section.settings.link_label != blank -%}
+          <div class="sv-hero__actions">
+            {%- if section.settings.button_label != blank -%}
+              <a class="button" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label }}</a>
+            {%- endif -%}
+            {%- if section.settings.link_label != blank -%}
+              <a class="link sv-hero__link" href="{{ section.settings.link_url | default: '#' }}">{{ section.settings.link_label }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SaahVay hero",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photograph",
+      "info": "Landscape, at least 2400px wide, with quiet space on the left for the headline. Leave empty to use the bundled studio photograph."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description",
+      "default": "A woman in a black wrap dress walks through a sunlit cream room."
+    },
+    {
+      "type": "select",
+      "id": "focal_point",
+      "label": "Keep in frame on small screens",
+      "options": [
+        { "value": "right", "label": "Right side of the photo" },
+        { "value": "center", "label": "Centre" },
+        { "value": "left", "label": "Left side of the photo" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Selected for your shape.",
+      "label": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "render_as_h1",
+      "default": true,
+      "label": "Use as the page H1 on the home page"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Every piece and every complete outfit here is chosen for one of five body shapes. Pick yours, or let sixty seconds decide.",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Find my fit",
+      "label": "Primary button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "default": "Shop by shape",
+      "label": "Secondary link label"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Secondary link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SaahVay hero"
+    }
+  ]
+}
+{% endschema %}

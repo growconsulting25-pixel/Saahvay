@@ -10,14 +10,17 @@ An Online Store 2.0 theme for saahvay.com, built on Shopify's Dawn 16.0.0 (MIT) 
 | Design-system CSS | `assets/saahvay.css` |
 | Shape chips on every product card | `snippets/shape-chips.liquid`, hooked into `snippets/card-product.liquid` |
 | Fit module on product pages | `snippets/fit-module.liquid`, new `fit_module` block in `sections/main-product.liquid` |
-| Shape cards (home and Shop by Shape page) | `sections/shape-cards.liquid` |
+| Full-bleed photographic hero with a bundled studio photograph as the default | `sections/saahvay-hero.liquid`, `assets/saahvay-hero.webp` |
+| Shape rail: five letters, one portrait, the panel re-sets when a letter is chosen | `sections/shape-rail.liquid`, `assets/shape-rail.js`, `assets/saahvay-shape-*.webp` |
+| Statement with photo ("Size tells you if it closes. Shape tells you if it works.") | `sections/saahvay-statement.liquid`, `assets/saahvay-lineup.webp` |
+| Shape cards (Shop by Shape page) | `sections/shape-cards.liquid` |
 | 60-second fit quiz with result and email capture | `sections/fit-quiz.liquid`, `assets/fit-quiz.js`, `sections/shape-products.liquid` |
 | Shape pages (guide above the grid, shape switcher, outfits row) | `sections/shape-guide.liquid`, `templates/collection.shape.json` |
 | Outfit builder (size per piece, add the whole look) | `sections/outfit-builder.liquid`, `assets/outfit-builder.js`, `templates/product.outfit.json` |
 | How it works, trust bar, testimonials | `sections/how-it-works.liquid`, `sections/trust-bar.liquid`, `sections/testimonials.liquid` |
 | Sticky mobile add-to-cart | `assets/saahvay.js` |
 | Organization, WebSite, and Breadcrumb structured data | `snippets/saahvay-schema.liquid` |
-| Homepage H1 | `sections/image-banner.liquid` renders the first heading as H1 on the index template |
+| Homepage H1 | `sections/saahvay-hero.liquid` renders its heading as H1 on the index template |
 | Copy for shapes, quiz, and outfit UI | `locales/en.default.json` under the `saahvay` key |
 
 ## Local development
@@ -64,3 +67,7 @@ Create these in Shopify admin. The theme degrades gracefully when something is m
 ## Product data rules
 
 Every imported product stays in draft until it meets `docs/strategy/saahvay-redesign-strategy.md` section 1.6, then `saahvay.publish_ready` is set to true. `node scripts/audit-products.mjs` reports products that break the rules, including any variant whose compare-at price is below its price.
+
+## Bundled photography
+
+The hero, the shape rail portraits, and the statement band ship with generated studio photographs in `assets/` (`saahvay-hero.webp`, `saahvay-shape-h.webp` … `saahvay-shape-a.webp`, `saahvay-lineup.webp`) so the theme looks finished before any store images exist. Every one of those sections has an image picker; the moment a merchant image is chosen the bundled file is no longer used. Replace them with real campaign photography before launch. The same files sit in `preview/img/` for the static preview.

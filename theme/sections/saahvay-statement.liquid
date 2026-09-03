@@ -1,0 +1,106 @@
+{%- comment -%}
+  Statement: a full-width photograph followed by one large line and its explanation.
+  On the home page it carries "Size tells you if it closes. Shape tells you if it works."
+{%- endcomment -%}
+
+{%- liquid
+  assign image = section.settings.image
+  assign alt_text = section.settings.image_alt
+  if image != blank and image.alt != blank
+    assign alt_text = image.alt
+  endif
+-%}
+
+<section class="sv-statement color-{{ section.settings.color_scheme }}">
+  <div class="sv-statement__media">
+    {%- if image != blank -%}
+      {{
+        image
+        | image_url: width: 2400
+        | image_tag:
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '750, 1100, 1500, 1800, 2400',
+          class: 'sv-statement__img',
+          alt: alt_text
+      }}
+    {%- else -%}
+      <img
+        class="sv-statement__img"
+        src="{{ 'saahvay-lineup.webp' | asset_url }}"
+        width="1600"
+        height="900"
+        loading="lazy"
+        alt="{{ alt_text | escape }}"
+      >
+    {%- endif -%}
+  </div>
+  <div class="page-width sv-statement__text">
+    <h2 class="sv-statement__heading">{{ section.settings.heading }}</h2>
+    <div class="sv-statement__body rte">
+      {{ section.settings.text }}
+      {%- if section.settings.button_label != blank -%}
+        <p><a class="button button--secondary" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label }}</a></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Statement with photo",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photograph",
+      "info": "Landscape, 16:9. Leave empty to use the bundled studio line-up."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description",
+      "default": "Six women in black and beige stand side by side in a bright studio."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Size tells you if it closes. <em>Shape</em> tells you if it works.",
+      "label": "Statement"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>Two women can wear the same size and suit completely different cuts. A wrap dress, a straight trouser, an A-line skirt: whether each one looks the way you hoped depends on your proportions, not on the number on the label.</p><p>So every product on SaahVay carries the shapes it is selected for, and says in one line why the cut works. You still choose your normal size on the product page.</p>",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "See all five shapes",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Statement with photo"
+    }
+  ]
+}
+{% endschema %}

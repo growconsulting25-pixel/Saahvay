@@ -1,47 +1,50 @@
 <title>SaahVay Storefront Preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap">
 <style>
-/* SaahVay storefront preview. Mirrors theme/assets/saahvay.css tokens and the templates in theme/templates. */
+/* SaahVay storefront preview. Mirrors theme/assets/saahvay.css tokens and the templates in theme/templates.
+   Photos live in preview/img. Run `node preview/inline.mjs` to produce a single self-contained file. */
 :root{
   --ink:#141414;--char:#3B3835;--white:#FFFFFF;--cream:#F7F3EC;--beige:#D9C8AD;--beige-d:#B49E7E;--stone:#8C8479;--success:#2F6B4F;--alert:#A33A2A;
   --serif:"Cormorant Garamond",Garamond,"Times New Roman",serif;--sans:"DM Sans","Helvetica Neue",Arial,sans-serif;
-  --r:2px;--ease:cubic-bezier(.2,0,0,1);--pw:1300px;
+  --r:2px;--ease:cubic-bezier(.16,1,.3,1);--pw:1300px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:auto}
 body{margin:0;background:var(--white);color:var(--char);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:var(--serif);font-weight:600;color:var(--ink);letter-spacing:0;line-height:1.1;margin:0;text-wrap:balance}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;color:var(--ink);letter-spacing:-.005em;line-height:1.05;margin:0;text-wrap:balance}
 h3,h4{font-weight:500}
 p{margin:0 0 1.4rem;max-width:68ch}
 a{color:var(--ink)}
 img,svg{max-width:100%;display:block}
+img{height:auto}
 button{font:inherit}
 .pw{max-width:var(--pw);margin:0 auto;padding:0 48px}
-.section{padding:96px 0}
-.section--tight{padding:48px 0}
+.section{padding:104px 0}
+.section--tight{padding:56px 0}
 .cream{background:var(--cream)}.beige{background:var(--beige)}.ink{background:var(--ink);color:var(--cream)}
-.label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:var(--char)}
-.h0{font-size:clamp(36px,4.5vw,56px);line-height:1.05}.h1{font-size:clamp(32px,3.4vw,44px)}.h2{font-size:clamp(26px,2.6vw,34px);line-height:1.15}.h3{font-size:24px;line-height:1.2}
+.h0{font-size:clamp(40px,4.8vw,64px);line-height:1}.h1{font-size:clamp(32px,3.6vw,48px)}.h2{font-size:clamp(26px,2.6vw,34px);line-height:1.15}.h3{font-size:24px;line-height:1.2}
 .lead{font-size:18px}
-.sec-head{display:flex;flex-direction:column;gap:12px;max-width:64ch;margin-bottom:32px}
+.sec-head{display:flex;flex-direction:column;gap:14px;max-width:62ch;margin-bottom:40px}
 .sec-head--center{margin-left:auto;margin-right:auto;text-align:center;align-items:center}
 .sec-head p{margin:0;font-size:17px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:var(--r);border:1px solid var(--ink);background:var(--ink);color:var(--white);font-size:15px;font-weight:500;letter-spacing:.02em;text-decoration:none;cursor:pointer;transition:background-color .16s var(--ease),color .16s var(--ease),border-color .16s var(--ease)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 28px;border-radius:var(--r);border:1px solid var(--ink);background:var(--ink);color:var(--white);font-size:15px;font-weight:500;letter-spacing:.02em;text-decoration:none;cursor:pointer;transition:background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
 .btn:hover{background:#000;border-color:#000}
 .btn--sec{background:var(--beige);border-color:var(--beige);color:var(--ink)}
 .btn--sec:hover{background:var(--beige-d);border-color:var(--beige-d)}
 .btn--ghost{background:transparent;color:var(--ink)}
 .btn--ghost:hover{background:var(--cream)}
 .btn:disabled{background:var(--cream);border-color:var(--cream);color:var(--stone);cursor:not-allowed}
-.btn:focus-visible,a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--beige-d);outline-offset:2px}
+.btn:focus-visible,a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--beige-d);outline-offset:3px}
 .link{color:var(--ink);text-decoration:underline;text-decoration-color:var(--beige-d);text-underline-offset:.3em;text-decoration-thickness:1px;background:none;border:0;padding:0;cursor:pointer;font:inherit}
 .link:hover{text-decoration-thickness:2px}
+.link--lg{font-family:var(--serif);font-size:22px;font-weight:500}
 .chips{display:flex;flex-wrap:wrap;gap:4px;list-style:none;padding:0;margin:0;align-items:center}
 .chip{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:999px;background:var(--beige);color:var(--ink);font-size:12px;font-weight:500;letter-spacing:.04em;line-height:1}
 .chip--sec{background:transparent;border:1px solid var(--beige-d)}
 .chip--more{background:var(--cream)}
 .chips__label{font-size:12px;color:var(--char);margin-right:4px}
+.photo{display:block;width:100%;height:100%;object-fit:cover;background:var(--beige)}
 
 /* preview bar */
 .pv{position:sticky;top:0;z-index:50;background:#1F1D1A;color:#D8D1C5;font-size:13px;border-bottom:1px solid #3A3631}
@@ -50,14 +53,14 @@ button{font:inherit}
 .pv nav{display:flex;gap:4px;flex-wrap:wrap}
 .pv nav a{color:#D8D1C5;text-decoration:none;padding:4px 10px;border-radius:999px}
 .pv nav a[aria-current="page"]{background:#3A3631;color:#F3EDE2}
-.pv .note{margin-left:auto;color:#8F877B}
+.pv .note{margin-left:auto;color:#9A9285}
 
 /* header */
 .ann{background:var(--beige);color:var(--ink);text-align:center;font-size:13px;padding:8px 16px}
 .ann a{color:inherit;text-decoration:none}.ann a u{text-decoration:underline;text-underline-offset:.25em}
 .hdr{background:var(--white);border-bottom:1px solid var(--beige);position:sticky;top:var(--pvh,41px);z-index:40}
 .hdr .in{max-width:var(--pw);margin:0 auto;padding:0 48px;height:72px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:32px}
-.logo{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:.08em;color:var(--ink);text-decoration:none}
+.logo{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:.1em;color:var(--ink);text-decoration:none}
 .nav{display:flex;gap:28px;list-style:none;margin:0;padding:0;justify-content:center}
 .nav a{color:var(--ink);text-decoration:none;font-size:15px;padding:6px 0;border-bottom:1px solid transparent}
 .nav a:hover,.nav a[aria-current="page"]{border-bottom-color:var(--ink)}
@@ -67,98 +70,150 @@ button{font:inherit}
 .bag-count{min-width:18px;height:18px;border-radius:999px;background:var(--ink);color:var(--white);font-size:11px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px}
 .burger{display:none}
 
-/* placeholders */
-.ph{position:relative;background:var(--cream);overflow:hidden;border-radius:var(--r);display:grid;place-items:center;color:var(--beige-d)}
-.ph--3x4{aspect-ratio:3/4}.ph--4x5{aspect-ratio:4/5}.ph--hero{aspect-ratio:4/5}.ph--wide{aspect-ratio:4/3}
-.ph svg{width:38%;height:auto;stroke:currentColor;fill:none;stroke-width:1.2}
-.ph--beige{background:#E8DCC8}
-.ph .cap{position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--beige-d)}
-.badge{position:absolute;left:12px;bottom:12px;background:var(--beige);color:var(--ink);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:var(--r);font-weight:500}
-.wish{position:absolute;right:10px;top:10px;background:none;border:0;padding:4px;cursor:pointer;color:var(--ink)}
-.wish svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5}
+/* media frames */
+.frame{position:relative;overflow:hidden;background:var(--beige);border-radius:var(--r)}
+.frame--3x4{aspect-ratio:3/4}.frame--4x5{aspect-ratio:4/5}.frame--4x3{aspect-ratio:4/3}.frame--16x9{aspect-ratio:16/9}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.frame .cap{position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cream);background:rgba(20,20,20,.55);padding:4px 8px;border-radius:var(--r)}
+.badge{position:absolute;left:12px;bottom:12px;background:var(--cream);color:var(--ink);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:var(--r);font-weight:500}
+.wish{position:absolute;right:10px;top:10px;background:rgba(247,243,236,.85);border:0;padding:6px;border-radius:999px;cursor:pointer;color:var(--ink);display:grid;place-items:center}
+.wish svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
 .wish[aria-pressed="true"] svg{fill:var(--ink)}
 
 /* product cards */
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 24px}
 .card{display:flex;flex-direction:column;gap:12px}
 .card__media{position:relative;display:block;text-decoration:none}
+.card__media .frame img{transition:transform 1.1s var(--ease)}
+.card__media:hover .frame img{transform:scale(1.035)}
 .card h3{font-family:var(--sans);font-size:15px;font-weight:500;line-height:1.35}
 .card h3 a{text-decoration:none}
 .card__body{display:flex;flex-direction:column;gap:6px}
 .price{font-variant-numeric:tabular-nums;font-size:16px;font-weight:500;color:var(--ink)}
 .price s{color:var(--char);font-weight:400;margin-left:6px}
 .swatches{display:flex;gap:6px}.swatches span{width:14px;height:14px;border-radius:999px;border:1px solid var(--beige-d)}
-.row-foot{margin-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.row-foot{margin-top:28px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 
-/* hero */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:64px;padding:64px 0}
-.hero__copy{display:flex;flex-direction:column;gap:20px;max-width:56ch}
-.hero__copy p{font-size:18px;margin:0}
-.hero__cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+/* hero: one photograph, edge to edge, headline set on the cream wall */
+.hero{position:relative;background:var(--cream);overflow:hidden}
+.hero__img{display:block;width:100%;height:min(86vh,880px);min-height:600px;object-fit:cover;object-position:62% 50%}
+.hero__copy{position:absolute;inset:0;display:flex;align-items:center;pointer-events:none}
+.hero__copy .in{max-width:var(--pw);margin:0 auto;padding:0 48px;width:100%}
+.hero__box{max-width:520px;display:flex;flex-direction:column;gap:24px;pointer-events:auto}
+.hero h1{font-size:clamp(48px,5.6vw,88px);line-height:.96;max-width:9ch}
+.hero p{font-size:19px;line-height:1.5;max-width:34ch;margin:0;color:var(--ink)}
+.hero__cta{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.hero__cta .btn{min-height:54px;padding:0 32px;font-size:16px}
 
-/* shape cards */
-.shapes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;list-style:none;padding:0;margin:0}
-.shape{position:relative;display:flex;flex-direction:column;background:var(--beige);border-radius:var(--r);overflow:hidden}
-.shape__media{position:relative;aspect-ratio:4/5;background:var(--cream)}
-.shape__letter{position:absolute;left:16px;bottom:12px;font-family:var(--serif);font-weight:600;font-size:56px;line-height:1;color:var(--ink);background:rgba(247,243,236,.92);padding:4px 12px 6px;border-radius:var(--r)}
-.shape__body{display:flex;flex-direction:column;gap:6px;padding:16px 16px 20px;flex:1}
-.shape__name{font-size:24px}
-.shape__name a{text-decoration:none}
-.shape__name a::after{content:"";position:absolute;inset:0}
-.shape__desc{font-size:14px;line-height:1.5;margin:0 0 auto}
-.shape .btn{position:relative;z-index:1;margin-top:16px;width:100%}
-.shapes-quiz{margin:32px 0 0;text-align:center;font-size:16px}
+/* the rail: five letters, one of them yours */
+.rail{background:var(--cream)}
+.rail__head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end;margin-bottom:48px}
+.rail__head h2{font-size:clamp(36px,4.2vw,64px);line-height:.98}
+.rail__head p{margin:0;font-size:17px}
+.rail__tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--beige-d);border-bottom:1px solid var(--beige-d);margin:0 0 56px}
+.rail__tab{background:none;border:0;border-right:1px solid var(--beige-d);padding:26px 8px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;color:var(--stone);transition:color .3s var(--ease),background-color .3s var(--ease)}
+.rail__tab:last-child{border-right:0}
+.rail__glyph{font-family:var(--serif);font-weight:600;font-size:clamp(64px,8.5vw,128px);line-height:.85}
+.rail__common{font-family:var(--sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--char)}
+.rail__tab:hover{color:var(--char)}
+.rail__tab[aria-selected="true"]{color:var(--ink);background:var(--white)}
+.rail__tab[aria-selected="true"] .rail__common{color:var(--ink)}
+.rail__stage{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:start}
+.rail__media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--beige);border-radius:var(--r)}
+.rail__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);transition:opacity .7s var(--ease),transform 1.6s var(--ease)}
+.rail__media img.is-on{opacity:1;transform:none}
+.rail__mark{position:absolute;left:20px;bottom:6px;font-family:var(--serif);font-weight:600;font-size:clamp(120px,14vw,200px);line-height:1;color:var(--cream);pointer-events:none;text-shadow:0 2px 24px rgba(20,20,20,.25)}
+.rail__panel{display:flex;flex-direction:column;gap:20px;transition:opacity .35s var(--ease),transform .5s var(--ease)}
+.rail__panel.is-swapping{opacity:0;transform:translateY(8px)}
+.rail__panel h3{font-size:clamp(32px,3.4vw,52px);font-weight:600;line-height:1}
+.rail__panel h3 span{font-weight:500;font-style:italic}
+.rail__panel .lead{margin:0;font-size:19px;max-width:44ch}
+.rail__panel .principles{margin-top:4px}
+.rail__actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.rail__pieces{margin-top:16px;padding-top:24px;border-top:1px solid var(--beige-d)}
+.rail__pieces h4{font-family:var(--sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--char);margin-bottom:16px}
+.rail__pieces .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.rail__pieces .card h3{font-size:14px}
+.rail__pieces .swatches{display:none}
+.rail__quiz{margin:56px 0 0;font-size:17px}
+
+/* line-up: shape is not size */
+.lineup{padding:0 0 104px}
+.lineup__img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.lineup__text{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;padding-top:64px;align-items:start}
+.lineup__text h2{font-size:clamp(40px,4.6vw,68px);line-height:.98}
+.lineup__text h2 em{font-style:italic;font-weight:500}
+.lineup__text p{font-size:17px}
+.lineup__text .btn{margin-top:8px}
+
+/* complete looks */
+.looks__lead{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:end;margin-bottom:48px}
+.looks__lead .lead{margin:18px 0 26px}
+.looks__cta{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
 
 /* how it works */
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;list-style:none;padding:0;margin:0}
-.step{display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:1px solid var(--beige)}
-.step__n{font-family:var(--serif);font-size:34px;font-weight:600;line-height:1;color:var(--ink)}
-.step h3{font-size:24px;font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;list-style:none;padding:0;margin:0}
+.step{display:flex;flex-direction:column;gap:14px;padding-top:20px;border-top:1px solid var(--beige-d)}
+.step__n{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1;color:var(--ink)}
+.step h3{font-size:26px;font-weight:600}
 .step p{font-size:15px;margin:0;max-width:40ch}
 
 /* image with text */
 .iwt{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
-.iwt__copy{display:flex;flex-direction:column;gap:16px;max-width:52ch}
+.iwt .frame img{transform:scale(1.03)}
+.iwt__copy{display:flex;flex-direction:column;gap:18px;max-width:52ch}
 .iwt__copy p{margin:0}
 
 /* trust */
-.trust{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;list-style:none;padding:0;margin:0}
+.trust{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;list-style:none;padding:28px 0;margin:0;border-top:1px solid var(--beige);border-bottom:1px solid var(--beige)}
 .trust li{display:flex;gap:12px;align-items:flex-start}
 .trust svg{flex:0 0 24px;width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .trust strong{display:block;font-weight:500;color:var(--ink);font-size:15px}
 .trust span{font-size:14px}
 
 /* newsletter */
-.news{text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.news{text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px}
 .news p{margin:0;max-width:52ch}
 .field{display:flex;max-width:440px;width:100%;border:1px solid var(--ink);border-radius:var(--r);background:var(--white);overflow:hidden}
-.field input{flex:1;border:0;padding:0 16px;height:48px;font:inherit;font-size:15px;min-width:0}
-.field button{border:0;background:var(--ink);color:var(--white);width:52px;cursor:pointer;display:grid;place-items:center}
+.field input{flex:1;border:0;padding:0 16px;height:50px;font:inherit;font-size:15px;min-width:0}
+.field button{border:0;background:var(--ink);color:var(--white);width:54px;cursor:pointer;display:grid;place-items:center}
 .field button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
 
 /* footer */
-.ftr{padding:56px 0 32px}
+.ftr{padding:64px 0 32px}
 .ftr .cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
 .ftr h4{color:var(--cream);font-family:var(--sans);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;margin-bottom:14px}
 .ftr ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:14px}
 .ftr a{color:#D8D1C5;text-decoration:none}.ftr a:hover{color:var(--cream)}
 .ftr p{color:#D8D1C5;font-size:14px}
-.ftr .bottom{margin-top:40px;padding-top:20px;border-top:1px solid #3A3631;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#8F877B}
+.ftr .bottom{margin-top:40px;padding-top:20px;border-top:1px solid #3A3631;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#9A9285}
 .ftr .field{border-color:#3A3631;background:#1F1D1A}.ftr .field input{background:transparent;color:var(--cream)}.ftr .field button{background:var(--beige);color:var(--ink)}
 
+/* shop by shape: five portraits */
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;list-style:none;padding:0;margin:0}
+.tile-shape a{display:block;text-decoration:none;color:var(--ink)}
+.tile-shape .frame{display:block;aspect-ratio:4/5}
+.tile-shape .frame img{transition:transform 1.1s var(--ease)}
+.tile-shape a:hover .frame img{transform:scale(1.035)}
+.tile-shape__letter{position:absolute;left:14px;bottom:4px;font-family:var(--serif);font-weight:600;font-size:96px;line-height:1;color:var(--cream);text-shadow:0 2px 20px rgba(20,20,20,.3)}
+.tile-shape__body{display:flex;flex-direction:column;gap:4px;padding:14px 0 0}
+.tile-shape__name{font-size:24px;font-weight:600}
+.tile-shape__common{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--char)}
+.tile-shape__desc{font-size:14px;line-height:1.5;margin:6px 0 0;color:var(--char)}
+
 /* shape guide */
-.guide{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px;align-items:start}
-.guide__eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.guide__mark{font-family:var(--serif);font-size:64px;font-weight:600;line-height:1;color:var(--ink)}
-.guide__desc{font-size:18px;margin:12px 0 20px;max-width:52ch}
+.guide{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:center}
+.guide__mark{font-family:var(--serif);font-size:clamp(96px,10vw,160px);font-weight:600;line-height:.8;color:var(--ink);display:block;margin-bottom:8px}
+.guide h1{font-size:clamp(36px,3.8vw,56px)}
+.guide h1 span{font-weight:500;font-style:italic}
+.guide__desc{font-size:19px;margin:16px 0 24px;max-width:44ch}
 .principles{list-style:none;padding:0;margin:0;display:grid;gap:12px}
-.principles li{padding-left:24px;position:relative;font-size:15px}
-.principles li::before{content:"";position:absolute;left:0;top:.9em;width:12px;height:1px;background:var(--ink)}
-.aside{display:flex;flex-direction:column;gap:16px;background:var(--cream);padding:24px;border-radius:var(--r)}
-.aside h2{font-size:22px}
-.switch{display:flex;gap:6px;flex-wrap:wrap}
-.switch a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;border:1px solid var(--beige-d);text-decoration:none;font-weight:500}
-.switch a[aria-current="page"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.principles li{padding-left:26px;position:relative;font-size:16px}
+.principles li::before{content:"";position:absolute;left:0;top:.85em;width:14px;height:1px;background:var(--ink)}
+.switch{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:28px}
+.switch span{font-size:14px;color:var(--char);margin-right:6px}
+.switch a:not(.link){display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--beige-d);text-decoration:none;font-family:var(--serif);font-size:22px;font-weight:600}
+.switch a:not(.link)[aria-current="page"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
 details.full{margin-top:24px}
 details.full summary{cursor:pointer;font-weight:500;color:var(--ink);list-style:none}
 details.full summary::-webkit-details-marker{display:none}
@@ -179,14 +234,16 @@ details.full summary::-webkit-details-marker{display:none}
 .pdp{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:start}
 .gallery{display:grid;gap:16px}
 .pdp__info{position:sticky;top:calc(var(--pvh,41px) + 88px);display:flex;flex-direction:column;gap:20px}
-.pdp__info h1{font-size:36px}
-.fit{background:var(--beige);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:14px}
+.pdp__info h1{font-size:40px}
+.fit{background:var(--cream);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px}
 .fit .row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.fit h2{font-size:24px}
 .fit p{margin:0;font-size:15px}
 .fit .notes{font-size:14px;color:var(--char)}
 .fit .links{display:flex;gap:16px;font-size:14px}
 .sizes{display:flex;flex-direction:column;gap:10px}
 .sizes .row{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.sizes .name{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--char)}
 .pills{display:flex;gap:8px;flex-wrap:wrap}
 .pill{min-width:48px;height:44px;padding:0 14px;border:1px solid var(--ink);border-radius:var(--r);background:var(--white);color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums;font-size:14px}
 .pill.on{background:var(--ink);color:var(--white)}
@@ -199,7 +256,7 @@ details.full summary::-webkit-details-marker{display:none}
 /* outfit builder */
 .outfit{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:48px;align-items:start}
 .pieces{list-style:none;padding:0;margin:0;display:grid;gap:16px}
-.piece{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:16px;border:1px solid var(--beige);border-radius:var(--r);background:var(--white);transition:opacity .16s var(--ease)}
+.piece{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:16px;border:1px solid var(--beige);border-radius:var(--r);background:var(--white);transition:opacity .2s var(--ease)}
 .piece[data-included="false"]{opacity:.5}
 .piece__body{display:flex;flex-direction:column;gap:8px}
 .piece h3{font-family:var(--sans);font-size:16px;font-weight:500}
@@ -217,44 +274,45 @@ details.full summary::-webkit-details-marker{display:none}
 .quiz{max-width:760px;margin:0 auto}
 .progress[hidden]{display:none}
 .progress{display:flex;align-items:center;gap:16px;margin-bottom:32px;font-size:13px;color:var(--char)}
-.bar{flex:1;height:4px;background:var(--beige);border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--ink);transition:width .32s var(--ease)}
+.bar{flex:1;height:4px;background:var(--beige);border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--ink);transition:width .4s var(--ease)}
 .qstep{display:none}.qstep[aria-hidden="false"]{display:block}
-.qstep h2{font-size:30px;margin-bottom:8px}
+.qstep h2{font-size:32px;margin-bottom:8px}
 .hint{color:var(--char);font-size:15px;margin:0 0 24px}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;list-style:none;padding:0;margin:0 0 32px}
-.tile{display:flex;flex-direction:column;gap:12px;width:100%;min-height:120px;padding:16px;background:var(--white);border:1px solid var(--beige);border-radius:var(--r);text-align:left;font-size:15px;line-height:1.45;color:var(--ink);cursor:pointer;transition:border-color .16s var(--ease),background-color .16s var(--ease)}
+.tile{display:flex;flex-direction:column;gap:12px;width:100%;min-height:120px;padding:16px;background:var(--white);border:1px solid var(--beige);border-radius:var(--r);text-align:left;font-size:15px;line-height:1.45;color:var(--ink);cursor:pointer;transition:border-color .2s var(--ease),background-color .2s var(--ease)}
 .tile:hover{border-color:var(--beige-d)}
 .tile[aria-pressed="true"]{border-color:var(--ink);background:var(--cream)}
 .tile svg{width:48px;height:56px;stroke:var(--beige-d);fill:none;stroke-width:1.5;stroke-linejoin:round}
 .tile[aria-pressed="true"] svg{stroke:var(--ink)}
 .qnav{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .result{display:none}.result[aria-hidden="false"]{display:block}
-.rhero{background:var(--beige);border-radius:var(--r);padding:32px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:start;margin-bottom:32px}
-.rmark{font-family:var(--serif);font-size:96px;font-weight:600;line-height:.9;color:var(--ink)}
-.rhero h2{font-size:38px;margin:4px 0 12px}
-.rhero h2 span{font-weight:500}
+.rhero{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:32px;align-items:center;margin-bottom:40px}
+.rhero .frame{aspect-ratio:4/5}
+.rmark{font-family:var(--serif);font-size:clamp(96px,10vw,140px);font-weight:600;line-height:.8;color:var(--ink);display:block;margin-bottom:8px}
+.rhero h2{font-size:40px;margin:0 0 12px}
+.rhero h2 span{font-weight:500;font-style:italic}
 .rhero .lead{margin:0 0 16px}
 .runner{font-size:14px;color:var(--char);margin:0 0 16px}
 .ractions{display:flex;flex-wrap:wrap;gap:12px}
-.rblock{margin-bottom:32px}.rblock h2{font-size:26px;margin-bottom:16px}
-.save{margin-top:40px;padding:24px;background:var(--cream);border-radius:var(--r)}
-.save h2{font-size:22px;margin-bottom:8px}.save p{font-size:15px;margin-bottom:16px}
+.rblock{margin-bottom:40px}.rblock h2{font-size:28px;margin-bottom:18px}
+.save{margin-top:40px;padding:24px;background:var(--white);border-radius:var(--r)}
+.save h2{font-size:24px;margin-bottom:8px}.save p{font-size:15px;margin-bottom:16px}
 .save .row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:16px}
 .save input[readonly]{flex:1;min-width:200px;height:44px;border:1px solid var(--beige);border-radius:var(--r);padding:0 12px;font:inherit;font-size:13px;color:var(--char);background:var(--white)}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--cream);padding:12px 18px;border-radius:var(--r);font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:70}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--cream);padding:12px 18px;border-radius:var(--r);font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:70;box-shadow:0 8px 24px rgba(20,20,20,.25)}
 .toast.show{opacity:1}
 
 /* cart drawer */
 .drawer{position:fixed;inset:0;z-index:60;display:none}
 .drawer[open]{display:block}
 .drawer .scrim{position:absolute;inset:0;background:rgba(20,20,20,.4)}
-.drawer .panel{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--white);display:flex;flex-direction:column}
+.drawer .panel{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--white);display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(20,20,20,.18)}
 .drawer header{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--beige)}
 .drawer header h2{font-size:26px}
 .drawer .close{background:none;border:0;cursor:pointer;font-size:24px;line-height:1;color:var(--ink)}
 .drawer .items{flex:1;overflow:auto;padding:16px 24px;display:grid;gap:16px;align-content:start}
 .citem{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:14px;align-items:start}
-.citem .ph{aspect-ratio:3/4}
+.citem .frame{aspect-ratio:3/4}
 .citem h3{font-family:var(--sans);font-size:14px;font-weight:500}
 .citem .meta{font-size:13px;color:var(--char)}
 .citem .rm{background:none;border:0;padding:0;font-size:12px;cursor:pointer;color:var(--char);text-decoration:underline}
@@ -270,16 +328,28 @@ details.full summary::-webkit-details-marker{display:none}
 .crumbs span{margin:0 6px}
 
 /* story */
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
-.pillars h3{font-size:24px;font-weight:600;margin-bottom:10px}
+.story-hero{padding:72px 0 0}
+.story-hero h1{font-size:clamp(40px,5vw,72px);max-width:16ch;margin-bottom:40px}
+.story-hero__media{overflow:hidden}
+.story-hero__img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transform:scale(1.03)}
+.story-cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;padding:72px 0 0}
+.story-cols h2{font-size:clamp(28px,2.8vw,38px)}
+.story-cols p{font-size:17px}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.pillars div{padding-top:20px;border-top:1px solid var(--beige-d)}
+.pillars h3{font-size:26px;font-weight:600;margin-bottom:10px}
 .pillars p{font-size:15px;margin:0}
 
 @media (max-width:1280px){.pv .note{display:none}}
 @media (max-width:989px){
-  .pw,.pv .in,.hdr .in{padding-left:24px;padding-right:24px}
+  .pw,.pv .in,.hdr .in,.hero__copy .in{padding-left:24px;padding-right:24px}
+  .section{padding:72px 0}
   .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .shapes{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .guide,.pdp,.outfit,.iwt,.hero{grid-template-columns:1fr;gap:32px}
+  .guide,.pdp,.outfit,.iwt,.rail__head,.rail__stage,.lineup__text,.looks__lead,.story-cols{grid-template-columns:1fr;gap:32px}
+  .hero__img{height:auto;aspect-ratio:16/10;min-height:0;object-position:60% 50%}
+  .hero__copy{position:static;background:var(--cream);padding:40px 0 48px}
+  .rail__stage{gap:40px}
+  .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
   .pdp__info,.summary{position:static}
   .summary{position:fixed;left:0;right:0;bottom:0;z-index:45;border-radius:0;padding:12px 16px;flex-direction:row;align-items:center;justify-content:space-between;border-top:1px solid var(--beige)}
   .summary h2,.summary .count{display:none}
@@ -288,31 +358,63 @@ details.full summary::-webkit-details-marker{display:none}
   .trust,.ftr .cols,.pillars,.steps{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:749px){
-  .pw,.pv .in,.hdr .in{padding-left:16px;padding-right:16px}
-  .section{padding:48px 0}
+  .pw,.pv .in,.hdr .in,.hero__copy .in{padding-left:16px;padding-right:16px}
+  .section{padding:56px 0}
   .hdr .in{grid-template-columns:auto 1fr auto;height:60px;gap:12px}
   .nav{display:none}.burger{display:inline-flex}
   .icons .txt{display:none}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-  .shapes{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:0 16px 8px;scrollbar-width:none}
-  .shapes::-webkit-scrollbar{display:none}
-  .shape{flex:0 0 76%;scroll-snap-align:start}
-  .shape__letter{font-size:44px}
+  .hero__img{aspect-ratio:4/5;object-position:92% 50%}
+  .hero__copy{padding:32px 0 40px}
+  .hero h1{font-size:clamp(42px,12vw,56px);max-width:none}
+  .hero p{font-size:17px}
+  .hero__cta{gap:20px}
+  .hero__cta .btn{width:100%}
+  .rail__tabs{margin-bottom:32px}
+  .rail__tab{padding:18px 4px 14px;gap:4px}
+  .rail__glyph{font-size:clamp(48px,14vw,64px)}
+  .rail__common{font-size:10px;letter-spacing:.04em}
+  .rail__mark{font-size:120px}
+  .rail__pieces .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .lineup{padding-bottom:56px}
+  .lineup__img{aspect-ratio:4/3;object-position:50% 40%}
+  .lineup__text{padding-top:32px;gap:20px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px}
+  .tiles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:0 16px 8px;scrollbar-width:none}
+  .tiles::-webkit-scrollbar{display:none}
+  .tile-shape{flex:0 0 72%;scroll-snap-align:start}
+  .tile-shape__letter{font-size:80px}
   .steps,.trust,.pillars,.ftr .cols,.wear{grid-template-columns:1fr}
-  .rhero{grid-template-columns:1fr;padding:24px}.rmark{font-size:72px}.rhero h2{font-size:30px}
-  .pdp__info h1{font-size:30px}
+  .rhero{grid-template-columns:1fr}.rmark{font-size:80px}.rhero h2{font-size:32px}
+  .pdp__info h1{font-size:32px}
   .sticky-atc{position:fixed;left:16px;right:16px;bottom:12px;z-index:45;box-shadow:0 0 0 12px var(--white)}
+  .story-hero{padding-top:40px}.story-hero h1{margin-bottom:24px}
+  .story-hero__img{aspect-ratio:4/3}
+  .story-cols{padding-top:40px}
   .pv .note{display:none}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto}
+  .rail__media img{transform:none}
+  .card__media:hover .frame img,.tile-shape a:hover .frame img{transform:none}
+}
 </style>
+
+<!--
+DIRECTION
+THESIS: Five letters, one of them yours. The whole store is sorted by a single letter, so the homepage is too.
+OWN-WORLD: A sunlit cream studio. Every photograph is shot in it: cream walls, warm daylight, black and beige clothes, big empty walls the serif letters can sit on.
+STORY: Arrive in the studio (hero) → meet the five letters and pick yours (rail) → understand why shape beats size (line-up) → complete looks → the newest pieces → the promise → the guide by email.
+FIRST VIEWPORT: one full-bleed photograph; headline set on the cream wall; one primary action, Find my fit; Shop by shape as the quiet second.
+FORM: Cormorant Garamond at display size for letters and headings, DM Sans for everything that has to be read. Photographs bleed to the edges; text sits in measured columns. Rules and white space carry structure, not cards.
+FINISH: One authored moment: choosing a letter on the rail crossfades the portrait and re-sets the copy and the pieces. Everything else moves on an exponential ease-out from a visible state, and holds still under reduced motion.
+-->
 
 <div class="pv"><div class="in">
   <strong>SaahVay storefront preview</strong>
   <nav aria-label="Preview pages">
     <a href="#home">Home</a><a href="#shop-by-shape">Shop by Shape</a><a href="#shape-a">Shape A page</a><a href="#product">Product</a><a href="#outfit">Outfit</a><a href="#quiz">Fit quiz</a><a href="#story">Our story</a>
   </nav>
-  <span class="note">Static preview with sample products and placeholder photos. Not connected to Shopify.</span>
+  <span class="note">Static preview. Sample catalogue, generated photography. Not connected to Shopify.</span>
 </div></div>
 
 <div class="ann"><a href="#quiz">Chosen for your shape. <u>Take the 60-second fit quiz.</u></a></div>
@@ -334,55 +436,77 @@ details.full summary::-webkit-details-marker{display:none}
 
 <!-- ============ HOME ============ -->
 <section data-page="home">
-  <div class="pw hero">
-    <div class="hero__copy">
-      <h1 class="h0">Style that understands your shape.</h1>
-      <p>Thoughtfully selected pieces and complete outfits, chosen for your body shape so you can shop with confidence in minutes.</p>
-      <div class="hero__cta"><a class="btn" href="#quiz">Find my fit</a><a class="btn btn--sec" href="#shape-a">Shop new arrivals</a></div>
+  <div class="hero">
+    <img class="hero__img" src="img/hero.webp" width="1800" height="1013" alt="A woman in a black wrap dress walks through a sunlit cream room." fetchpriority="high">
+    <div class="hero__copy"><div class="in"><div class="hero__box">
+      <h1>Selected for your shape.</h1>
+      <p>Every piece and every complete outfit here is chosen for one of five body shapes. Pick yours, or let sixty seconds decide.</p>
+      <div class="hero__cta"><a class="btn" href="#quiz">Find my fit</a><a class="link link--lg" href="#shop-by-shape">Shop by shape</a></div>
+    </div></div></div>
     </div>
-    <div class="ph ph--hero ph--beige" aria-label="Hero photo placeholder">
-      <svg viewBox="0 0 48 80"><circle cx="24" cy="10" r="6"/><path d="M14 22h20l4 30H10zM16 52l-3 26M32 52l3 26"/></svg><span class="cap">Editorial photo</span>
+
+  <div class="rail section"><div class="pw">
+    <div class="rail__head">
+      <h2>Five shapes. One of them is yours.</h2>
+      <p>Shape is about proportion, not size: where your shoulders, waist, and hips sit relative to each other. Choose the letter that sounds most like you and the page changes to suit it.</p>
+    </div>
+    <div class="rail__tabs" role="tablist" aria-label="Body shapes" id="railTabs"></div>
+    <div class="rail__stage">
+      <div class="rail__media" id="railMedia"></div>
+      <div class="rail__panel" role="tabpanel" id="railPanel" aria-live="polite"></div>
+    </div>
+    <p class="rail__quiz">Not sure which letter is you? <a class="link" href="#quiz">Take the 60-second fit quiz</a></p>
+  </div></div>
+
+  <div class="lineup">
+    <img class="lineup__img" src="img/lineup.webp" width="1600" height="900" alt="Six women in black and beige stand side by side in a bright studio.">
+    <div class="pw lineup__text">
+      <h2>Size tells you if it closes. <em>Shape</em> tells you if it works.</h2>
+      <div>
+        <p>Two women can wear the same size and suit completely different cuts. A wrap dress, a straight trouser, an A-line skirt: whether each one looks the way you hoped depends on your proportions, not on the number on the label.</p>
+        <p>So every product on SaahVay carries the shapes it is selected for, and says in one line why the cut works. You still choose your normal size on the product page.</p>
+        <a class="btn btn--sec" href="#shop-by-shape">See all five shapes</a>
+      </div>
     </div>
   </div>
 
-  <div class="cream section"><div class="pw">
-    <div class="sec-head sec-head--center"><h2 class="h1">Show us your shape. We'll show you what works.</h2><p>Five shapes, one starting point. Pick the one that sounds most like you, or let the quiz decide.</p></div>
-    <ul class="shapes" id="shapeCardsHome"></ul>
-    <p class="shapes-quiz">Not sure which shape you are? <a class="link" href="#quiz">Take the 60-second fit quiz</a></p>
+  <div class="section cream"><div class="pw">
+    <div class="looks__lead">
+      <div class="frame frame--4x3"><img src="img/look-monday.webp" width="1000" height="563" alt="Three women laughing by a window, wearing a beige belted blazer, a black slip dress, and a cream top with black trousers."></div>
+      <div>
+        <h2 class="h1">Complete looks, ready to wear</h2>
+        <p class="lead">Whole outfits in your sizes, added in one click. Each look names the shapes it is selected for, and you can leave out anything you already own.</p>
+        <div class="looks__cta"><a class="btn" href="#outfit">Build the Monday Look</a><a class="link" href="#outfit">All complete looks</a></div>
+      </div>
+    </div>
+    <div class="grid" id="homeOutfits"></div>
   </div></div>
 
   <div class="section"><div class="pw">
-    <div class="sec-head"><h2 class="h1">Complete looks, ready to wear</h2><p>Whole outfits in your sizes, one click to add. Each look names the shapes it is selected for.</p></div>
-    <div class="grid" id="homeOutfits"></div>
-    <div class="row-foot"><span></span><a class="btn btn--ghost" href="#outfit">View all looks</a></div>
-  </div></div>
-
-  <div class="section" style="padding-top:0"><div class="pw">
-    <div class="sec-head"><h2 class="h1">New this week</h2></div>
+    <div class="sec-head"><h2 class="h1">New this week</h2><p>Eight pieces, every one tagged with the shapes it is selected for.</p></div>
     <div class="grid" id="homeNew"></div>
-    <div class="row-foot"><span></span><a class="btn btn--ghost" href="#shape-a">View all</a></div>
+    <div class="row-foot"><span></span><a class="btn btn--ghost" href="#shape-a">View all new arrivals</a></div>
   </div></div>
 
   <div class="cream section"><div class="pw">
     <div class="sec-head"><h2 class="h1">How SaahVay works</h2><p>Three steps from landing to a look you feel good in.</p></div>
     <ol class="steps">
-      <li class="step"><span class="step__n">1</span><h3>Discover your shape</h3><p>Pick your shape or take the 60-second quiz. No measurements needed.</p><a class="link" href="#quiz">Take the quiz</a></li>
+      <li class="step"><span class="step__n">1</span><h3>Discover your shape</h3><p>Pick your letter or take the 60-second quiz. No measurements needed.</p><a class="link" href="#quiz">Take the quiz</a></li>
       <li class="step"><span class="step__n">2</span><h3>Explore selected styles</h3><p>Every piece names the shapes it is selected for and why the cut works.</p><a class="link" href="#shop-by-shape">Shop by shape</a></li>
       <li class="step"><span class="step__n">3</span><h3>Build your look with confidence</h3><p>Add a single piece or a complete outfit in your sizes, then check out securely with Shopify.</p><a class="link" href="#outfit">See complete looks</a></li>
     </ol>
   </div></div>
 
   <div class="section"><div class="pw iwt">
-    <div class="ph ph--wide" aria-label="Story photo placeholder"><svg viewBox="0 0 48 80"><circle cx="24" cy="10" r="6"/><path d="M14 22h20l4 30H10zM16 52l-3 26M32 52l3 26"/></svg><span class="cap">Lifestyle photo</span></div>
+    <div class="frame frame--4x3"><img src="img/story.webp" width="1200" height="675" alt="Five women in conversation in a sunlit room, dressed in black, cream, and camel." loading="lazy"></div>
     <div class="iwt__copy">
-      <span class="label">Why SaahVay exists</span>
       <h2 class="h1">A screen full of clothes and no way to tell what would work on you.</h2>
       <p>That is the frustration SaahVay was built to end. Every piece here is selected for specific body shapes and says so. Complete outfits take the guesswork out of what goes with what. Sizes are real, fit notes are honest, and nothing is ever called a flaw.</p>
       <div><a class="btn btn--sec" href="#story">Our story</a></div>
     </div>
   </div></div>
 
-  <div class="section--tight"><div class="pw">
+  <div class="section--tight" style="padding-top:0"><div class="pw">
     <ul class="trust">
       <li><svg viewBox="0 0 24 24"><path d="M7 3h10l-3 9 3 9H7l3-9z"/></svg><div><strong>Chosen for your shape</strong><span>Every piece names the shapes it is selected for</span></div></li>
       <li><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg><div><strong>Shipping</strong><span><a class="link" href="#">See delivery times and costs</a></span></div></li>
@@ -394,19 +518,19 @@ details.full summary::-webkit-details-marker{display:none}
   <div class="beige section"><div class="pw news">
     <h2 class="h1">Get your personal shape guide</h2>
     <p>Take the quiz and we'll send your shape guide: the cuts, lengths, and outfit ideas selected for you, plus early access to new pieces in your shape.</p>
-    <form class="field" onsubmit="event.preventDefault();toast('Preview only. In the live store this subscribes the customer.')"><label class="visually-hidden" for="nl" hidden>Email</label><input id="nl" type="email" placeholder="Email" required><button aria-label="Subscribe"><svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button></form>
+    <form class="field" onsubmit="event.preventDefault();toast('Preview only. In the live store this subscribes the customer.')"><label for="nl" hidden>Email</label><input id="nl" type="email" placeholder="Email" required><button aria-label="Subscribe"><svg viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg></button></form>
   </div></div>
 </section>
 
 <!-- ============ SHOP BY SHAPE ============ -->
 <section data-page="shop-by-shape">
-  <div class="cream section--tight" style="padding-top:48px;padding-bottom:72px"><div class="pw">
+  <div class="cream section--tight" style="padding-bottom:80px"><div class="pw">
     <div class="sec-head sec-head--center"><h1 class="h0">Shop by shape</h1><p>Body shape is about proportion, not size. Pick the shape that sounds most like you to see pieces and complete looks selected for it.</p></div>
-    <ul class="shapes" id="shapeCardsPage"></ul>
-    <p class="shapes-quiz">Not sure which shape you are? <a class="link" href="#quiz">Take the 60-second fit quiz</a></p>
+    <ul class="tiles" id="shapeCardsPage"></ul>
+    <p class="rail__quiz" style="text-align:center">Not sure which shape you are? <a class="link" href="#quiz">Take the 60-second fit quiz</a></p>
   </div></div>
   <div class="section"><div class="pw">
-    <div class="sec-head"><span class="label">Shape, not size</span><h2 class="h1">Your shape is how you are proportioned. Your size is what you buy.</h2><p>Two women can wear the same size and suit very different cuts. Shape looks at where your shoulders, waist, and hips sit relative to each other, and that is what decides whether a wrap dress, a straight trouser, or an A-line skirt will look the way you want. On SaahVay, every product carries the shapes it is selected for. You still choose your normal size on the product page.</p></div>
+    <div class="sec-head"><h2 class="h1">Your shape is how you are proportioned. Your size is what you buy.</h2><p>Two women can wear the same size and suit very different cuts. Shape looks at where your shoulders, waist, and hips sit relative to each other, and that is what decides whether a wrap dress, a straight trouser, or an A-line skirt will look the way you want. On SaahVay, every product carries the shapes it is selected for. You still choose your normal size on the product page.</p></div>
     <div class="hero__cta"><a class="btn" href="#quiz">Take the 60-second quiz</a><a class="btn btn--sec" href="#">Fit and sizing guide</a></div>
   </div></div>
 </section>
@@ -414,23 +538,19 @@ details.full summary::-webkit-details-marker{display:none}
 <!-- ============ SHAPE A COLLECTION ============ -->
 <section data-page="shape-a">
   <div class="cream section--tight"><div class="pw">
-    <div class="crumbs" style="padding:0 0 16px"><a href="#home">Home</a><span>/</span><a href="#shop-by-shape">Shop by Shape</a><span>/</span>Shape A</div>
+    <div class="crumbs" style="padding:0 0 32px"><a href="#home">Home</a><span>/</span><a href="#shop-by-shape">Shop by Shape</a><span>/</span>Shape A</div>
     <div class="guide">
       <div>
-        <div class="guide__eyebrow"><span class="guide__mark" aria-hidden="true">A</span><span class="label">Pear</span></div>
-        <h1 class="h1">Shape A</h1>
+        <span class="guide__mark" aria-hidden="true">A</span>
+        <h1>Shape A, <span>the Pear</span></h1>
         <p class="guide__desc">Hips wider than shoulders. Pieces that bring attention up and skim below.</p>
         <ul class="principles"><li>Bring attention up with detail at the neckline and shoulder.</li><li>A-line and fluid skirts skim rather than cling.</li><li>Darker, matte fabrics below; texture and colour above.</li></ul>
         <details class="full"><summary>Read the full guide ↓</summary><p style="margin-top:16px">The A shape carries its width low, which means the eye naturally lands at the hip. Everything that works for this shape does one of two things: it draws the eye upward, or it lets fabric fall cleanly from the widest point instead of gripping it. Boat necks, structured shoulders, and detail at the collarbone do the first job. A-line skirts, fluid wide legs, and wrap dresses that tie above the hip do the second.</p></details>
+        <div class="switch"><span>Not your shape?</span><a href="#shape-a" title="Shape H">H</a><a href="#shape-a" title="Shape O">O</a><a href="#shape-a" title="Shape V">V</a><a href="#shape-a" title="Shape X">X</a><a href="#shape-a" aria-current="page">A</a><a class="link" href="#quiz" style="margin-left:8px">or take the quiz</a></div>
       </div>
-      <aside class="aside">
-        <h2>Not your shape?</h2>
-        <p style="margin:0">Switch to another shape, or let the quiz decide.</p>
-        <div class="switch"><a href="#shape-a" title="Shape H">H</a><a href="#shape-a" title="Shape O">O</a><a href="#shape-a" title="Shape V">V</a><a href="#shape-a" title="Shape X">X</a><a href="#shape-a" aria-current="page">A</a></div>
-        <a class="btn btn--sec" href="#quiz">Take the 60-second fit quiz</a>
-      </aside>
+      <div class="frame frame--4x5"><img src="img/shape-a.webp" width="680" height="907" alt="A woman in a cream boat-neck top and a full beige skirt, styled for shape A."></div>
     </div>
-    <div style="margin-top:48px">
+    <div style="margin-top:64px">
       <div class="sec-head"><h2 class="h2">Complete looks for shape A</h2></div>
       <div class="grid" id="shapeOutfits"></div>
       <p style="margin:16px 0 0"><a class="link" href="#outfit">See all complete looks</a></p>
@@ -458,14 +578,13 @@ details.full summary::-webkit-details-marker{display:none}
   <div class="pw crumbs"><a href="#home">Home</a><span>/</span><a href="#shape-a">Dresses</a><span>/</span>Mira Wrap Dress</div>
   <div class="pw section--tight pdp">
     <div class="gallery">
-      <div class="ph ph--3x4 ph--beige"><svg viewBox="0 0 48 80"><circle cx="24" cy="10" r="6"/><path d="M14 22h20l4 30H10zM16 52l-3 26M32 52l3 26"/></svg><span class="cap">Front, on model</span></div>
-      <div class="ph ph--3x4"><svg viewBox="0 0 48 80"><circle cx="24" cy="10" r="6"/><path d="M14 22h20l4 30H10zM16 52l-3 26M32 52l3 26"/></svg><span class="cap">Back</span></div>
-      <div class="ph ph--3x4"><svg viewBox="0 0 48 80"><path d="M10 20h28M12 40h24M14 60h20"/></svg><span class="cap">Fabric detail</span></div>
+      <div class="frame frame--3x4"><img src="img/shape-x.webp" width="680" height="907" alt="Mira Wrap Dress in ink, front view on model."><span class="cap">Front, on model</span></div>
+      <div class="frame frame--3x4"><img src="img/hero.webp" width="1800" height="1013" alt="Mira Wrap Dress in motion, walking through a sunlit room." style="object-position:100% 50%" loading="lazy"><span class="cap">In motion</span></div>
     </div>
     <div class="pdp__info">
       <div><h1>Mira Wrap Dress</h1><div class="price" style="font-size:18px;margin-top:8px">$68.00</div></div>
       <div class="fit">
-        <p class="label">Fit and shape</p>
+        <h2>Fit and shape</h2>
         <div class="row"><span class="chips__label">Selected for</span><ul class="chips"><li class="chip">X</li><li class="chip">A</li><li class="chip">H</li></ul></div>
         <div class="row"><span class="chips__label">Also works for</span><ul class="chips"><li class="chip chip--sec">O</li></ul></div>
         <p>The tie waist sits above the hip and adds definition for H shapes, follows the waist on X shapes, and lets the skirt fall cleanly past the hip on A shapes.</p>
@@ -473,12 +592,12 @@ details.full summary::-webkit-details-marker{display:none}
         <div class="links"><a class="link" href="#">Size guide</a><a class="link" href="#quiz">Find your shape</a></div>
       </div>
       <div class="sizes">
-        <div class="row"><span class="label">Size</span><a class="link" href="#" style="font-size:13px">Size guide</a></div>
+        <div class="row"><span class="name">Size</span><a class="link" href="#" style="font-size:13px">Size guide</a></div>
         <div class="pills" id="sizePills"><button class="pill">XS</button><button class="pill">S</button><button class="pill on">M</button><button class="pill">L</button><button class="pill" disabled>XL</button></div>
         <span class="stock">In stock. Ships in 1 to 2 business days.</span>
       </div>
       <div class="sizes">
-        <span class="label">Colour: Ink</span>
+        <span class="name">Colour: Ink</span>
         <div class="swatches"><span style="background:#141414"></span><span style="background:#7A6A4F"></span><span style="background:#F7F3EC"></span></div>
       </div>
       <button class="btn" id="atc">Add to bag</button>
@@ -503,12 +622,11 @@ details.full summary::-webkit-details-marker{display:none}
 <section data-page="outfit">
   <div class="pw crumbs"><a href="#home">Home</a><span>/</span><a href="#outfit">Outfits</a><span>/</span>The Monday Look</div>
   <div class="pw section--tight pdp" style="padding-bottom:0">
-    <div class="gallery"><div class="ph ph--3x4 ph--beige"><svg viewBox="0 0 48 80"><circle cx="24" cy="10" r="6"/><path d="M14 22h20l4 30H10zM16 52l-3 26M32 52l3 26"/></svg><span class="cap">Full look, on model</span></div></div>
+    <div class="gallery"><div class="frame frame--3x4"><img src="img/look-monday.webp" width="1000" height="563" alt="The Monday Look worn by three women by a window: a beige belted blazer, a black slip dress, a cream top with black trousers." style="object-position:30% 50%"><span class="cap">Full look, on model</span></div></div>
     <div class="pdp__info">
-      <span class="label">Complete look</span>
       <h1>The Monday Look</h1>
       <div class="fit">
-        <p class="label">Selected for</p>
+        <h2>Selected for</h2>
         <div class="row"><ul class="chips"><li class="chip">A</li><li class="chip">X</li><li class="chip">H</li></ul></div>
         <p>A boat-neck top brings attention up, the wide-leg trouser skims from the hip, and the belted blazer marks the waist. Three pieces, one confident Monday.</p>
       </div>
@@ -528,7 +646,7 @@ details.full summary::-webkit-details-marker{display:none}
       </div>
     </div>
   </div>
-  <div class="cream section" style="padding-top:48px"><div class="pw">
+  <div class="cream section" style="padding-top:56px"><div class="pw">
     <div class="sec-head"><h2 class="h2">More complete looks</h2></div>
     <div class="grid" id="moreLooks"></div>
   </div></div>
@@ -554,16 +672,17 @@ details.full summary::-webkit-details-marker{display:none}
 
 <!-- ============ STORY ============ -->
 <section data-page="story">
-  <div class="section"><div class="pw iwt">
-    <div class="ph ph--3x4 ph--beige"><svg viewBox="0 0 48 80"><circle cx="24" cy="10" r="6"/><path d="M14 22h20l4 30H10zM16 52l-3 26M32 52l3 26"/></svg><span class="cap">Founder or team photo</span></div>
-    <div class="iwt__copy">
-      <span class="label">Our story</span>
-      <h1 class="h0">We built the store we wanted to shop in.</h1>
-      <p>SaahVay started with a familiar frustration: a screen full of clothes and no way to tell which of them would work on you. Size charts answer whether something will close. They do not answer whether it will look the way you hoped.</p>
+  <div class="story-hero"><div class="pw"><h1>We built the store we wanted to shop in.</h1></div>
+    <div class="story-hero__media"><img class="story-hero__img" src="img/story.webp" width="1200" height="675" alt="Five women in conversation in a sunlit room, dressed in black, cream, and camel."></div>
+  </div>
+  <div class="pw story-cols">
+    <h2>Size charts answer whether something will close. They do not answer whether it will look the way you hoped.</h2>
+    <div>
+      <p>SaahVay started with a familiar frustration: a screen full of clothes and no way to tell which of them would work on you. Scrolling was not the problem. Deciding was.</p>
       <p>So every piece here is selected for specific body shapes and says so. Complete outfits take the guesswork out of what goes with what. Fit notes are honest, model sizes are listed, and nothing on this site is ever called a flaw.</p>
     </div>
-  </div></div>
-  <div class="cream section"><div class="pw">
+  </div>
+  <div class="section"><div class="pw">
     <div class="sec-head"><h2 class="h1">What we stand behind</h2></div>
     <div class="pillars">
       <div><h3>Chosen for your shape</h3><p>Every product names the shapes it is selected for and gives a one-line reason. That is the promise the store is built on.</p></div>
@@ -571,7 +690,7 @@ details.full summary::-webkit-details-marker{display:none}
       <div><h3>Honest fit</h3><p>Real measurements, model sizes, plain language about fabric and stretch, and a returns policy stated the way it actually works.</p></div>
     </div>
   </div></div>
-  <div class="section"><div class="pw news">
+  <div class="cream section"><div class="pw news">
     <h2 class="h1">We want getting dressed to be the easy part of your day.</h2>
     <p>Whether you are heading into a meeting, a school run, or a weekend that is finally yours, you should be able to open SaahVay, find what suits you in minutes, and feel like yourself in it.</p>
     <div class="hero__cta"><a class="btn" href="#quiz">Find my shape</a><a class="btn btn--sec" href="#shop-by-shape">Shop by shape</a></div>
@@ -607,30 +726,30 @@ details.full summary::-webkit-details-marker{display:none}
 <script>
 /* ---------- sample data (placeholder catalogue) ---------- */
 const SHAPES = {
-  H:{name:'Shape H',common:'Rectangle',desc:'Shoulders, waist, and hips in a straight line. Pieces that add shape at the waist.',p:['Add definition at the waist with ties, belts, and seams.','Wrap and peplum shapes create curve without volume.','Play with necklines and hems. Your frame carries detail well.']},
-  O:{name:'Shape O',common:'Apple',desc:'Fullness through the middle, with great legs and shoulders. Pieces that flow from the shoulder or bust.',p:['Let fabric fall from the bust or shoulder rather than the waist.','V and scoop necklines draw the eye upward.','Show the legs. Above-the-knee hems and slim trousers work well.']},
-  V:{name:'Shape V',common:'Inverted Triangle',desc:'Strong shoulders, narrower hips. Pieces that add volume and detail below the waist.',p:['Add volume below the waist with full skirts, wide legs, and pleats.','Keep the shoulder line clean: no puff sleeves or epaulettes.','Deep V and halter necklines narrow the upper frame.']},
-  X:{name:'Shape X',common:'Hourglass',desc:'Bust and hips in proportion with a defined waist. Pieces that follow the waist rather than skip it.',p:['Follow the waist: wrap, belted, and fitted-then-flared shapes.','Boxy cuts that skip the waist lose your best line.','Fabrics with some drape or stretch hold the shape.']},
-  A:{name:'Shape A',common:'Pear',desc:'Hips wider than shoulders. Pieces that bring attention up and skim below.',p:['Bring attention up with detail at the neckline and shoulder.','A-line and fluid skirts skim rather than cling.','Darker, matte fabrics below; texture and colour above.']},
+  H:{name:'Shape H',common:'Rectangle',desc:'Shoulders, waist, and hips in a straight line. Pieces that add shape at the waist.',p:['Add definition at the waist with ties, belts, and seams.','Wrap and peplum shapes create curve without volume.','Play with necklines and hems. Your frame carries detail well.'],img:'img/shape-h.webp',alt:'A woman in a beige belted shirt dress, styled for shape H.'},
+  O:{name:'Shape O',common:'Apple',desc:'Fullness through the middle, with great legs and shoulders. Pieces that flow from the shoulder or bust.',p:['Let fabric fall from the bust or shoulder rather than the waist.','V and scoop necklines draw the eye upward.','Show the legs. Above-the-knee hems and slim trousers work well.'],img:'img/shape-o.webp',alt:'A woman in a black V-neck dress that falls from the bust, styled for shape O.'},
+  V:{name:'Shape V',common:'Inverted Triangle',desc:'Strong shoulders, narrower hips. Pieces that add volume and detail below the waist.',p:['Add volume below the waist with full skirts, wide legs, and pleats.','Keep the shoulder line clean: no puff sleeves or epaulettes.','Deep V and halter necklines narrow the upper frame.'],img:'img/shape-v.webp',alt:'A woman in a black halter top and a full pleated beige skirt, styled for shape V.'},
+  X:{name:'Shape X',common:'Hourglass',desc:'Bust and hips in proportion with a defined waist. Pieces that follow the waist rather than skip it.',p:['Follow the waist: wrap, belted, and fitted-then-flared shapes.','Boxy cuts that skip the waist lose your best line.','Fabrics with some drape or stretch hold the shape.'],img:'img/shape-x.webp',alt:'A woman in a black wrap dress tied at the waist, styled for shape X.'},
+  A:{name:'Shape A',common:'Pear',desc:'Hips wider than shoulders. Pieces that bring attention up and skim below.',p:['Bring attention up with detail at the neckline and shoulder.','A-line and fluid skirts skim rather than cling.','Darker, matte fabrics below; texture and colour above.'],img:'img/shape-a.webp',alt:'A woman in a cream boat-neck top and a full beige skirt, styled for shape A.'},
 };
 const P = [
-  {id:1,t:'Mira Wrap Dress',price:6800,shapes:['X','A','H'],colors:['#141414','#7A6A4F','#F7F3EC'],sizes:['XS','S','M','L','XL'],soldOut:['XL'],newIn:true},
-  {id:2,t:'Ada Wide-Leg Trouser',price:5800,shapes:['V','A'],colors:['#141414','#3B3835'],sizes:['XS','S','M','L','XL'],soldOut:[],newIn:true},
-  {id:3,t:'Noor Tiered Midi Skirt',price:4800,compare:5600,shapes:['H','X'],colors:['#7A6A4F','#F7F3EC'],sizes:['XS','S','M','L'],soldOut:['XS'],newIn:true},
-  {id:4,t:'Lena Boat-Neck Top',price:3600,shapes:['A','H'],colors:['#F7F3EC','#141414','#D9C8AD'],sizes:['XS','S','M','L','XL'],soldOut:[],newIn:true},
-  {id:5,t:'Sana Column Dress',price:7200,shapes:['O','V'],colors:['#141414'],sizes:['S','M','L','XL'],soldOut:[],newIn:false},
-  {id:6,t:'Elle Belted Blazer',price:8900,shapes:['H','O','A'],colors:['#D9C8AD','#141414'],sizes:['XS','S','M','L'],soldOut:['L'],newIn:true},
-  {id:7,t:'Iris A-Line Skirt',price:5200,shapes:['A','X'],colors:['#141414','#7A6A4F'],sizes:['XS','S','M','L','XL'],soldOut:[],newIn:true},
-  {id:8,t:'Maya Draped Tunic',price:4400,shapes:['O','V'],colors:['#F7F3EC','#B49E7E'],sizes:['S','M','L','XL'],soldOut:[],newIn:true},
+  {id:1,t:'Mira Wrap Dress',price:6800,shapes:['X','A','H'],colors:['#141414','#7A6A4F','#F7F3EC'],sizes:['XS','S','M','L','XL'],soldOut:['XL'],newIn:true,img:'img/shape-x.webp',alt:'Mira Wrap Dress in ink, on model.'},
+  {id:2,t:'Ada Wide-Leg Trouser',price:5800,shapes:['V','A'],colors:['#141414','#3B3835'],sizes:['XS','S','M','L','XL'],soldOut:[],newIn:true,img:'img/p-ada.webp',alt:'Ada Wide-Leg Trouser in ink, on model.'},
+  {id:3,t:'Noor Tiered Midi Skirt',price:4800,compare:5600,shapes:['H','X'],colors:['#7A6A4F','#F7F3EC'],sizes:['XS','S','M','L'],soldOut:['XS'],newIn:true,img:'img/p-noor.webp',alt:'Noor Tiered Midi Skirt in beige, on model.'},
+  {id:4,t:'Lena Boat-Neck Top',price:3600,shapes:['A','H'],colors:['#F7F3EC','#141414','#D9C8AD'],sizes:['XS','S','M','L','XL'],soldOut:[],newIn:true,img:'img/p-lena.webp',alt:'Lena Boat-Neck Top in cream, on model.'},
+  {id:5,t:'Sana Column Dress',price:7200,shapes:['O','V'],colors:['#141414'],sizes:['S','M','L','XL'],soldOut:[],newIn:false,img:'img/p-sana.webp',alt:'Sana Column Dress in ink, on model.'},
+  {id:6,t:'Elle Belted Blazer',price:8900,shapes:['H','O','A'],colors:['#D9C8AD','#141414'],sizes:['XS','S','M','L'],soldOut:['L'],newIn:true,img:'img/p-elle.webp',alt:'Elle Belted Blazer in beige, on model.'},
+  {id:7,t:'Iris A-Line Skirt',price:5200,shapes:['A','X'],colors:['#141414','#7A6A4F'],sizes:['XS','S','M','L','XL'],soldOut:[],newIn:true,img:'img/shape-v.webp',alt:'Iris A-Line Skirt in beige, on model.'},
+  {id:8,t:'Maya Draped Tunic',price:4400,shapes:['O','V'],colors:['#F7F3EC','#B49E7E'],sizes:['S','M','L','XL'],soldOut:[],newIn:true,img:'img/p-maya.webp',alt:'Maya Draped Tunic in ink, belted, on model.'},
 ];
 const LOOKS = [
-  {id:101,t:'The Monday Look',shapes:['A','X','H'],pieces:[4,2,6]},
-  {id:102,t:'The Weekend Edit',shapes:['H','X'],pieces:[3,4]},
-  {id:103,t:'The Evening Column',shapes:['O','V'],pieces:[5,6]},
-  {id:104,t:'The Long Lunch',shapes:['X','A'],pieces:[1,6]},
+  {id:101,t:'The Monday Look',shapes:['A','X','H'],pieces:[4,2,6],img:'img/look-monday.webp',pos:'30% 50%',alt:'The Monday Look: cream top, black trousers, and a beige belted blazer.'},
+  {id:102,t:'The Weekend Edit',shapes:['H','X'],pieces:[3,4],img:'img/shape-a.webp',alt:'The Weekend Edit: cream boat-neck top with a tiered beige skirt.'},
+  {id:103,t:'The Evening Column',shapes:['O','V'],pieces:[5,6],img:'img/shape-o.webp',alt:'The Evening Column: a black column dress.'},
+  {id:104,t:'The Long Lunch',shapes:['X','A'],pieces:[1,6],img:'img/shape-h.webp',alt:'The Long Lunch: a belted dress with a blazer over the shoulders.'},
 ];
 const money = c => '$' + (c/100).toFixed(2);
-const fig = `<svg viewBox="0 0 48 80"><circle cx="24" cy="10" r="6"/><path d="M14 22h20l4 30H10zM16 52l-3 26M32 52l3 26"/></svg>`;
+const pic = (o, extra='') => `<img src="${o.img}" alt="${o.alt||''}" loading="lazy"${o.pos?` style="object-position:${o.pos}"`:''}${extra}>`;
 
 function cardHTML(p, href='#product', isLook=false){
   const chips = p.shapes.slice(0,3).map(s=>`<li class="chip" title="${SHAPES[s].name}">${s}</li>`).join('') + (p.shapes.length>3?`<li class="chip chip--more">+${p.shapes.length-3}</li>`:'');
@@ -638,12 +757,12 @@ function cardHTML(p, href='#product', isLook=false){
     : `<div class="price">${money(p.price)}${p.compare?`<s>${money(p.compare)}</s>`:''}</div>`;
   const sw = isLook ? '' : `<div class="swatches">${p.colors.map(c=>`<span style="background:${c}"></span>`).join('')}</div>`;
   const badge = p.compare ? `<span class="badge">Sale</span>` : (isLook?`<span class="badge">Complete look</span>`:'');
-  return `<article class="card"><a class="card__media" href="${href}"><div class="ph ph--3x4${isLook?' ph--beige':''}">${fig}</div>${badge}<button class="wish" aria-label="Save to wishlist" aria-pressed="false" onclick="event.preventDefault();this.setAttribute('aria-pressed',this.getAttribute('aria-pressed')!=='true')"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button></a><div class="card__body"><h3><a href="${href}">${p.t}</a></h3><ul class="chips" aria-label="Selected for">${chips}</ul>${price}${sw}</div></article>`;
+  return `<article class="card"><a class="card__media" href="${href}"><div class="frame frame--3x4">${pic(p)}</div>${badge}<button class="wish" aria-label="Save to wishlist" aria-pressed="false" onclick="event.preventDefault();this.setAttribute('aria-pressed',this.getAttribute('aria-pressed')!=='true')"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button></a><div class="card__body"><h3><a href="${href}">${p.t}</a></h3><ul class="chips" aria-label="Selected for">${chips}</ul>${price}${sw}</div></article>`;
 }
-function shapeCardHTML(k){const s=SHAPES[k];return `<li class="shape"><div class="shape__media ph ph--4x5">${fig}<span class="shape__letter" aria-hidden="true">${k}</span></div><div class="shape__body"><span class="label">${s.common}</span><h3 class="shape__name"><a href="#shape-a">${s.name}</a></h3><p class="shape__desc">${s.desc}</p><a class="btn" href="#shape-a" tabindex="-1" aria-hidden="true">Shop shape ${k}</a></div></li>`;}
+function shapeCardHTML(k){const s=SHAPES[k];return `<li class="tile-shape"><a href="#shape-a"><div class="frame">${pic(s)}<span class="tile-shape__letter" aria-hidden="true">${k}</span></div><div class="tile-shape__body"><h3 class="tile-shape__name">${s.name}</h3><span class="tile-shape__common">${s.common}</span><p class="tile-shape__desc">${s.desc}</p></div></a></li>`;}
 
 /* ---------- render ---------- */
-['shapeCardsHome','shapeCardsPage'].forEach(id=>document.getElementById(id).innerHTML=Object.keys(SHAPES).map(shapeCardHTML).join(''));
+document.getElementById('shapeCardsPage').innerHTML=Object.keys(SHAPES).map(shapeCardHTML).join('');
 document.getElementById('homeOutfits').innerHTML=LOOKS.map(l=>cardHTML(l,'#outfit',true)).join('');
 document.getElementById('homeNew').innerHTML=P.filter(p=>p.newIn).slice(0,8).map(p=>cardHTML(p)).join('');
 const aProducts=P.filter(p=>p.shapes.includes('A'));
@@ -653,6 +772,37 @@ document.getElementById('shapeOutfits').innerHTML=LOOKS.filter(l=>l.shapes.inclu
 document.getElementById('wearWith').innerHTML=[6,7].map(id=>cardHTML(P.find(p=>p.id===id))).join('');
 document.getElementById('alsoLike').innerHTML=[7,3,4,2].map(id=>cardHTML(P.find(p=>p.id===id))).join('');
 document.getElementById('moreLooks').innerHTML=LOOKS.slice(1).map(l=>cardHTML(l,'#outfit',true)).join('');
+
+/* ---------- the rail: pick a letter, the section re-sets itself ---------- */
+const KEYS=Object.keys(SHAPES);
+const railTabs=document.getElementById('railTabs'), railMedia=document.getElementById('railMedia'), railPanel=document.getElementById('railPanel');
+railTabs.innerHTML=KEYS.map((k,i)=>`<button class="rail__tab" role="tab" id="railTab${k}" aria-selected="${i===0}" aria-controls="railPanel" tabindex="${i===0?0:-1}" data-shape="${k}"><span class="rail__glyph" aria-hidden="true">${k}</span><span class="rail__common">${SHAPES[k].common}</span></button>`).join('');
+railMedia.innerHTML=KEYS.map((k,i)=>`<img src="${SHAPES[k].img}" width="680" height="907" alt="${SHAPES[k].alt}" data-shape="${k}" class="${i===0?'is-on':''}"${i>0?' loading="lazy"':''}>`).join('')+`<span class="rail__mark" id="railMark" aria-hidden="true">H</span>`;
+let railKey=null, railTimer=null;
+function railPanelHTML(k){
+  const s=SHAPES[k], prods=P.filter(p=>p.shapes.includes(k)).slice(0,3);
+  return `<h3 tabindex="-1">${s.name}, <span>the ${s.common}</span></h3><p class="lead">${s.desc}</p><ul class="principles">${s.p.map(x=>`<li>${x}</li>`).join('')}</ul><div class="rail__actions"><a class="btn" href="#shape-a">Shop shape ${k}</a><a class="link" href="#outfit">Complete looks for ${k}</a></div><div class="rail__pieces"><h4>Selected for shape ${k}</h4><div class="grid">${prods.map(p=>cardHTML(p)).join('')}</div></div>`;
+}
+function setShape(k, focusTab){
+  if(k===railKey) return;
+  railKey=k;
+  railTabs.querySelectorAll('.rail__tab').forEach(t=>{const on=t.dataset.shape===k;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(on&&focusTab)t.focus()});
+  railMedia.querySelectorAll('img').forEach(im=>im.classList.toggle('is-on',im.dataset.shape===k));
+  document.getElementById('railMark').textContent=k;
+  railPanel.setAttribute('aria-labelledby','railTab'+k);
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  clearTimeout(railTimer);
+  if(reduce||!railPanel.innerHTML){railPanel.innerHTML=railPanelHTML(k);return}
+  railPanel.classList.add('is-swapping');
+  railTimer=setTimeout(()=>{railPanel.innerHTML=railPanelHTML(k);requestAnimationFrame(()=>railPanel.classList.remove('is-swapping'))},220);
+}
+railTabs.addEventListener('click',e=>{const t=e.target.closest('.rail__tab');if(t)setShape(t.dataset.shape)});
+railTabs.addEventListener('keydown',e=>{
+  const i=KEYS.indexOf(railKey);let n=null;
+  if(e.key==='ArrowRight')n=(i+1)%KEYS.length;else if(e.key==='ArrowLeft')n=(i-1+KEYS.length)%KEYS.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=KEYS.length-1;
+  if(n!==null){e.preventDefault();setShape(KEYS[n],true)}
+});
+setShape('H');
 
 /* preview bar height drives sticky offsets */
 const pvBar=document.querySelector('.pv');
@@ -676,7 +826,7 @@ const cart=[];
 const drawer=document.getElementById('drawer');
 function renderCart(){
   const items=document.getElementById('cartItems');
-  items.innerHTML=cart.length?cart.map((c,i)=>`<div class="citem"><div class="ph">${fig}</div><div><h3>${c.t}</h3><div class="meta">Size ${c.size}${c.look?` · ${c.look}`:''}</div><button class="rm" onclick="removeItem(${i})">Remove</button></div><div class="price">${money(c.price)}</div></div>`).join(''):`<p class="empty">Your bag is empty. <a class="link" href="#shape-a" onclick="closeDrawer()">Shop by shape</a> or <a class="link" href="#quiz" onclick="closeDrawer()">take the fit quiz</a>.</p>`;
+  items.innerHTML=cart.length?cart.map((c,i)=>`<div class="citem"><div class="frame"><img src="${c.img}" alt=""></div><div><h3>${c.t}</h3><div class="meta">Size ${c.size}${c.look?` · ${c.look}`:''}</div><button class="rm" onclick="removeItem(${i})">Remove</button></div><div class="price">${money(c.price)}</div></div>`).join(''):`<p class="empty">Your bag is empty. <a class="link" href="#shape-a" onclick="closeDrawer()">Shop by shape</a> or <a class="link" href="#quiz" onclick="closeDrawer()">take the fit quiz</a>.</p>`;
   document.getElementById('cartTotal').textContent=money(cart.reduce((s,c)=>s+c.price,0));
   document.getElementById('bagCount').textContent=cart.length;
 }
@@ -692,7 +842,7 @@ renderCart();
 /* product page */
 let chosenSize='M';
 document.getElementById('sizePills').addEventListener('click',e=>{const b=e.target.closest('.pill');if(!b||b.disabled)return;document.querySelectorAll('#sizePills .pill').forEach(p=>p.classList.remove('on'));b.classList.add('on');chosenSize=b.textContent});
-document.getElementById('atc').onclick=()=>{cart.push({t:'Mira Wrap Dress',size:chosenSize,price:6800});renderCart();openDrawer()};
+document.getElementById('atc').onclick=()=>{cart.push({t:'Mira Wrap Dress',size:chosenSize,price:6800,img:P[0].img});renderCart();openDrawer()};
 /* sticky mobile add-to-cart */
 const atc=document.getElementById('atc');
 const sentinel=document.createElement('div');atc.parentNode.insertBefore(sentinel,atc);
@@ -701,7 +851,7 @@ new IntersectionObserver(([en])=>{atc.classList.toggle('sticky-atc',window.match
 /* ---------- outfit builder ---------- */
 const look=LOOKS[0];
 const piecesEl=document.getElementById('pieces');
-piecesEl.innerHTML=look.pieces.map(id=>{const p=P.find(x=>x.id===id);return `<li class="piece" data-id="${p.id}" data-included="true"><a class="ph ph--3x4" href="#product">${fig}</a><div class="piece__body"><h3><a href="#product" style="text-decoration:none">${p.t}</a></h3><ul class="chips">${p.shapes.map(s=>`<li class="chip">${s}</li>`).join('')}</ul><div class="price">${money(p.price)}</div><div class="controls"><label class="visually-hidden" hidden for="sz${p.id}">Size for ${p.t}</label><select class="sel" id="sz${p.id}">${p.sizes.map(s=>`<option value="${s}" ${p.soldOut.includes(s)?'disabled':''} ${s==='M'?'selected':''}>${s}${p.soldOut.includes(s)?' (sold out)':''}</option>`).join('')}</select><label class="toggle"><input type="checkbox" checked> Include</label></div></div></li>`}).join('');
+piecesEl.innerHTML=look.pieces.map(id=>{const p=P.find(x=>x.id===id);return `<li class="piece" data-id="${p.id}" data-included="true"><a class="frame frame--3x4" href="#product">${pic(p)}</a><div class="piece__body"><h3><a href="#product" style="text-decoration:none">${p.t}</a></h3><ul class="chips">${p.shapes.map(s=>`<li class="chip">${s}</li>`).join('')}</ul><div class="price">${money(p.price)}</div><div class="controls"><label hidden for="sz${p.id}">Size for ${p.t}</label><select class="sel" id="sz${p.id}">${p.sizes.map(s=>`<option value="${s}" ${p.soldOut.includes(s)?'disabled':''} ${s==='M'?'selected':''}>${s}${p.soldOut.includes(s)?' (sold out)':''}</option>`).join('')}</select><label class="toggle"><input type="checkbox" checked> Include</label></div></div></li>`}).join('');
 function updateOutfit(){
   const items=[...piecesEl.querySelectorAll('.piece')].filter(li=>li.dataset.included!=='false');
   const total=items.reduce((s,li)=>s+P.find(p=>p.id==li.dataset.id).price,0);
@@ -711,7 +861,7 @@ function updateOutfit(){
 }
 piecesEl.addEventListener('change',e=>{const li=e.target.closest('.piece');if(e.target.type==='checkbox')li.dataset.included=e.target.checked?'true':'false';updateOutfit()});
 document.getElementById('addLook').onclick=()=>{
-  [...piecesEl.querySelectorAll('.piece')].filter(li=>li.dataset.included!=='false').forEach(li=>{const p=P.find(x=>x.id==li.dataset.id);cart.push({t:p.t,size:li.querySelector('select').value,price:p.price,look:look.t})});
+  [...piecesEl.querySelectorAll('.piece')].filter(li=>li.dataset.included!=='false').forEach(li=>{const p=P.find(x=>x.id==li.dataset.id);cart.push({t:p.t,size:li.querySelector('select').value,price:p.price,look:look.t,img:p.img})});
   renderCart();openDrawer();
 };
 updateOutfit();
@@ -735,7 +885,7 @@ stepsEl.addEventListener('click',e=>{const t=e.target.closest('.tile');if(t){con
 function finish(){const tot={H:0,O:0,V:0,X:0,A:0};answers.forEach(a=>a&&Object.entries(a).forEach(([k,v])=>tot[k]+=v));const r=Object.keys(tot).sort((a,b)=>tot[b]-tot[a]||order.indexOf(a)-order.indexOf(b));showResult(r[0],tot[r[0]]-tot[r[1]]<=1&&tot[r[1]]>0?r[1]:null)}
 function showResult(k,ru){const s=SHAPES[k];qsteps.forEach(x=>x.setAttribute('aria-hidden','true'));document.getElementById('progress').hidden=true;
   const prods=P.filter(p=>p.shapes.includes(k)).slice(0,4);
-  document.getElementById('resultPanel').innerHTML=`<div class="rhero"><span class="rmark" aria-hidden="true">${k}</span><div><p class="label">Your shape</p><h2 tabindex="-1">${s.name}, <span>the ${s.common}</span></h2><p class="lead">${s.desc}</p>${ru?`<p class="runner">You're close to ${SHAPES[ru].name} too. Pieces tagged for both will suit you.</p>`:''}<div class="ractions"><a class="btn" href="#shape-a">Shop shape ${k}</a><a class="btn btn--sec" href="#outfit">See complete looks</a></div></div></div><div class="rblock"><h2>What works for shape ${k}</h2><ul class="principles">${s.p.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="rblock"><h2>Selected for shape ${k}</h2><div class="grid">${prods.map(p=>cardHTML(p)).join('')}</div><p style="margin-top:16px"><a class="link" href="#shape-a">See everything selected for shape ${k}</a></p></div>`;
+  document.getElementById('resultPanel').innerHTML=`<div class="rhero"><div class="frame">${pic(s)}</div><div><span class="rmark" aria-hidden="true">${k}</span><h2 tabindex="-1">${s.name}, <span>the ${s.common}</span></h2><p class="lead">${s.desc}</p>${ru?`<p class="runner">You're close to ${SHAPES[ru].name} too. Pieces tagged for both will suit you.</p>`:''}<div class="ractions"><a class="btn" href="#shape-a">Shop shape ${k}</a><a class="btn btn--sec" href="#outfit">See complete looks</a></div></div></div><div class="rblock"><h2>What works for shape ${k}</h2><ul class="principles">${s.p.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="rblock"><h2>Selected for shape ${k}</h2><div class="grid">${prods.map(p=>cardHTML(p)).join('')}</div><p style="margin-top:16px"><a class="link" href="#shape-a">See everything selected for shape ${k}</a></p></div>`;
   document.getElementById('resultLink').value=location.href.split('?')[0].split('#')[0]+'#quiz?shape='+k;
   const r=document.getElementById('result');r.setAttribute('aria-hidden','false');r.querySelector('h2').focus();window.scrollTo({top:document.getElementById('quiz').offsetTop-24,behavior:'smooth'});
 }

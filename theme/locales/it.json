@@ -680,6 +680,13 @@
       "total": "Total",
       "add_all": "Add the full look",
       "empty": "This look has no pieces linked yet."
+    },
+    "rail": {
+      "tablist": "Body shapes",
+      "the": "the",
+      "looks_for": "Complete looks for {{ letter }}",
+      "selected_for": "Selected for shape {{ letter }}",
+      "not_sure": "Not sure which letter is you?"
     }
   }
 }

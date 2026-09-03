@@ -1,0 +1,311 @@
+{%- comment -%}
+  Shape rail: five letters across the page. Choosing one crossfades the portrait and re-sets
+  the copy, the principles, and the first pieces from that shape's collection.
+  Every panel is rendered server-side so the section reads without JavaScript; shape-rail.js only toggles.
+{%- endcomment -%}
+
+<script src="{{ 'shape-rail.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="shape-rail__head">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="shape-rail__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p>{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <shape-rail class="shape-rail" data-section="{{ section.id }}">
+      <div class="shape-rail__tabs" role="tablist" aria-label="{{ 'saahvay.rail.tablist' | t }}">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign letter = block.settings.letter
+            assign letter_down = letter | downcase
+            assign common_key = 'saahvay.shapes.' | append: letter_down | append: '.common'
+          -%}
+          <button
+            class="shape-rail__tab"
+            type="button"
+            role="tab"
+            id="Rail-{{ section.id }}-tab-{{ letter }}"
+            aria-controls="Rail-{{ section.id }}-panel-{{ letter }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+            data-shape="{{ letter }}"
+            {{ block.shopify_attributes }}
+          >
+            <span class="shape-rail__glyph" aria-hidden="true">{{ letter }}</span>
+            <span class="shape-rail__common">{{ common_key | t }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <div class="shape-rail__stage">
+        <div class="shape-rail__media">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign letter = block.settings.letter
+              assign letter_down = letter | downcase
+              assign name_key = 'saahvay.shapes.' | append: letter_down | append: '.name'
+              assign image = block.settings.image
+              assign handle = 'shape-' | append: letter_down
+              assign target = block.settings.collection
+              if target == blank
+                assign target = collections[handle]
+              endif
+              if image == blank and target.image != blank
+                assign image = target.image
+              endif
+              assign alt_text = block.settings.image_alt
+              if alt_text == blank
+                assign alt_text = name_key | t
+              endif
+              assign fallback_name = 'saahvay-shape-' | append: letter_down | append: '.webp'
+              assign img_class = 'shape-rail__portrait'
+              if forloop.first
+                assign img_class = 'shape-rail__portrait is-on'
+              endif
+              assign loading = 'lazy'
+              if forloop.first
+                assign loading = 'eager'
+              endif
+              assign shape_attr = '<img data-shape="' | append: letter | append: '" '
+            -%}
+            {%- if image != blank -%}
+              {{
+                image
+                | image_url: width: 1400
+                | image_tag:
+                  loading: loading,
+                  widths: '540, 720, 900, 1100, 1400',
+                  sizes: '(min-width: 990px) 40vw, 100vw',
+                  class: img_class,
+                  alt: alt_text
+                | replace: '<img ', shape_attr
+              }}
+            {%- else -%}
+              <img
+                class="{{ img_class }}"
+                src="{{ fallback_name | asset_url }}"
+                width="680"
+                height="907"
+                loading="{{ loading }}"
+                alt="{{ alt_text | escape }}"
+                data-shape="{{ letter }}"
+              >
+            {%- endif -%}
+          {%- endfor -%}
+          <span class="shape-rail__mark" aria-hidden="true" data-rail-mark>{{ section.blocks.first.settings.letter }}</span>
+        </div>
+
+        <div class="shape-rail__panels">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign letter = block.settings.letter
+              assign letter_down = letter | downcase
+              assign base = 'saahvay.shapes.' | append: letter_down
+              assign name_key = base | append: '.name'
+              assign common_key = base | append: '.common'
+              assign descriptor_key = base | append: '.descriptor'
+              assign p1 = base | append: '.principle_1'
+              assign p2 = base | append: '.principle_2'
+              assign p3 = base | append: '.principle_3'
+              assign handle = 'shape-' | append: letter_down
+              assign target = block.settings.collection
+              if target == blank
+                assign target = collections[handle]
+              endif
+              assign url = target.url | default: routes.collections_url
+              assign outfits = target.metafields.saahvay.outfits_collection.value
+              if outfits == blank
+                assign outfits = collections['outfits']
+              endif
+            -%}
+            <div
+              class="shape-rail__panel"
+              role="tabpanel"
+              id="Rail-{{ section.id }}-panel-{{ letter }}"
+              aria-labelledby="Rail-{{ section.id }}-tab-{{ letter }}"
+              data-shape="{{ letter }}"
+              {% unless forloop.first %}hidden{% endunless %}
+            >
+              <h3 class="shape-rail__name">{{ name_key | t }}, <span>{{ 'saahvay.rail.the' | t }} {{ common_key | t }}</span></h3>
+              <p class="shape-rail__lead">{{ descriptor_key | t }}</p>
+              <ul class="sv-principles" role="list">
+                <li>{{ p1 | t }}</li>
+                <li>{{ p2 | t }}</li>
+                <li>{{ p3 | t }}</li>
+              </ul>
+              <div class="shape-rail__actions">
+                <a class="button" href="{{ url }}">{{ 'saahvay.labels.shop_shape' | t: letter: letter }}</a>
+                {%- if outfits != blank -%}
+                  <a class="link" href="{{ outfits.url }}">{{ 'saahvay.rail.looks_for' | t: letter: letter }}</a>
+                {%- endif -%}
+              </div>
+              {%- if target != blank and target.products.size > 0 -%}
+                <div class="shape-rail__pieces">
+                  <h4 class="shape-rail__pieces-title">{{ 'saahvay.rail.selected_for' | t: letter: letter }}</h4>
+                  <ul class="shape-rail__grid" role="list">
+                    {%- for product in target.products limit: 3 -%}
+                      <li>
+                        {% render 'card-product',
+                          card_product: product,
+                          media_aspect_ratio: 'portrait',
+                          show_secondary_image: false,
+                          lazy_load: true,
+                          section_id: section.id
+                        %}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </shape-rail>
+
+    {%- if section.settings.show_quiz_link and section.settings.quiz_page != blank -%}
+      <p class="shape-rail__quiz">
+        {{ 'saahvay.rail.not_sure' | t }}
+        <a class="link" href="{{ section.settings.quiz_page.url }}">{{ 'saahvay.labels.take_quiz' | t }}</a>
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shape rail",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Five shapes. One of them is yours.",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Shape is about proportion, not size: where your shoulders, waist, and hips sit relative to each other. Choose the letter that sounds most like you and the page changes to suit it.",
+      "label": "Supporting text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quiz_link",
+      "default": true,
+      "label": "Show the fit quiz link"
+    },
+    {
+      "type": "page",
+      "id": "quiz_page",
+      "label": "Fit quiz page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "shape",
+      "name": "Shape",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "select",
+          "id": "letter",
+          "label": "Shape",
+          "options": [
+            { "value": "H", "label": "H (Rectangle)" },
+            { "value": "O", "label": "O (Apple)" },
+            { "value": "V", "label": "V (Inverted Triangle)" },
+            { "value": "X", "label": "X (Hourglass)" },
+            { "value": "A", "label": "A (Pear)" }
+          ],
+          "default": "H"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Portrait",
+          "info": "4:5 ratio. Falls back to the collection image, then to the bundled studio portrait."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Portrait description"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Leave empty to use the collection with handle shape-h, shape-o, shape-v, shape-x, or shape-a."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shape rail",
+      "blocks": [
+        { "type": "shape", "settings": { "letter": "H" } },
+        { "type": "shape", "settings": { "letter": "O" } },
+        { "type": "shape", "settings": { "letter": "V" } },
+        { "type": "shape", "settings": { "letter": "X" } },
+        { "type": "shape", "settings": { "letter": "A" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
