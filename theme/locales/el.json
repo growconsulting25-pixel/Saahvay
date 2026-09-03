@@ -527,5 +527,147 @@
       "expanded": "Η φόρμα παραλήπτη δωροκάρτας αναπτύχθηκε",
       "collapsed": "Η φόρμα παραλήπτη δωροκάρτας συμπτύχθηκε"
     }
+  },
+  "saahvay": {
+    "labels": {
+      "home": "Home",
+      "selected_for": "Selected for",
+      "also_works_for": "Also works for",
+      "shop_shape": "Shop shape {{ letter }}",
+      "not_sure": "Not sure which shape you are?",
+      "take_quiz": "Take the 60-second fit quiz",
+      "change_shape": "Change my shape",
+      "not_your_shape": "Not your shape?",
+      "switch_or_quiz": "Switch to another shape, or let the quiz decide.",
+      "read_full_guide": "Read the full guide",
+      "looks_for_shape": "Complete looks for shape {{ letter }}",
+      "see_all_looks": "See all complete looks",
+      "see_looks": "See complete looks",
+      "see_all_shape": "See everything selected for shape {{ letter }}",
+      "no_products_yet": "Pieces for this shape are being added. Check back soon.",
+      "the": "the",
+      "verified": "Verified purchase"
+    },
+    "shapes": {
+      "h": {
+        "name": "Shape H",
+        "common": "Rectangle",
+        "descriptor": "Shoulders, waist, and hips in a straight line. Pieces that add shape at the waist.",
+        "principle_1": "Add definition at the waist with ties, belts, and seams.",
+        "principle_2": "Wrap and peplum shapes create curve without volume.",
+        "principle_3": "Play with necklines and hems. Your frame carries detail well."
+      },
+      "o": {
+        "name": "Shape O",
+        "common": "Apple",
+        "descriptor": "Fullness through the middle, with great legs and shoulders. Pieces that flow from the shoulder or bust.",
+        "principle_1": "Let fabric fall from the bust or shoulder rather than the waist.",
+        "principle_2": "V and scoop necklines draw the eye upward.",
+        "principle_3": "Show the legs. Above-the-knee hems and slim trousers work well."
+      },
+      "v": {
+        "name": "Shape V",
+        "common": "Inverted Triangle",
+        "descriptor": "Strong shoulders, narrower hips. Pieces that add volume and detail below the waist.",
+        "principle_1": "Add volume below the waist with full skirts, wide legs, and pleats.",
+        "principle_2": "Keep the shoulder line clean: no puff sleeves or epaulettes.",
+        "principle_3": "Deep V and halter necklines narrow the upper frame."
+      },
+      "x": {
+        "name": "Shape X",
+        "common": "Hourglass",
+        "descriptor": "Bust and hips in proportion with a defined waist. Pieces that follow the waist rather than skip it.",
+        "principle_1": "Follow the waist: wrap, belted, and fitted-then-flared shapes.",
+        "principle_2": "Boxy cuts that skip the waist lose your best line.",
+        "principle_3": "Fabrics with some drape or stretch hold the shape."
+      },
+      "a": {
+        "name": "Shape A",
+        "common": "Pear",
+        "descriptor": "Hips wider than shoulders. Pieces that bring attention up and skim below.",
+        "principle_1": "Bring attention up with detail at the neckline and shoulder.",
+        "principle_2": "A-line and fluid skirts skim rather than cling.",
+        "principle_3": "Darker, matte fabrics below; texture and colour above."
+      }
+    },
+    "fit_module": {
+      "heading": "Fit and shape",
+      "size_guide": "Size guide",
+      "find_shape": "Find your shape",
+      "no_data": "Shape guidance for this piece is on its way. Take the quiz to see pieces already selected for you."
+    },
+    "quiz": {
+      "progress": "Question {{ current }} of {{ total }}",
+      "back": "Back",
+      "skip": "I'd rather just browse",
+      "your_shape": "Your shape",
+      "runner_up": "You're close to {{ shape }} too. Pieces tagged for both will suit you.",
+      "what_works": "What works for shape {{ shape }}",
+      "selected_for": "Selected for shape {{ shape }}",
+      "save_heading": "Save your result",
+      "save_text": "We'll email your shape guide: the cuts, lengths, and outfit ideas selected for you.",
+      "save_button": "Send my shape guide",
+      "save_success": "Your shape guide is on its way.",
+      "result_link": "Link to this result",
+      "restart": "Start over",
+      "q1": {
+        "question": "Compared with your hips, your shoulders are…",
+        "hint": "Think about how a fitted jacket sits, not what you'd change.",
+        "a1": "Wider than my hips",
+        "a2": "About the same as my hips",
+        "a3": "Narrower than my hips"
+      },
+      "q2": {
+        "question": "Your waist is…",
+        "hint": "Relative to your bust and hips.",
+        "a1": "Clearly narrower than my bust and hips",
+        "a2": "About the same width as my bust and hips",
+        "a3": "Fuller than my hips or bust"
+      },
+      "q3": {
+        "question": "When you gain a little, where does it show first?",
+        "hint": "Everyone has a place. This only tells us where fabric needs room.",
+        "a1": "Around my middle",
+        "a2": "Hips and thighs",
+        "a3": "Shoulders, arms, or upper back",
+        "a4": "Fairly evenly all over"
+      },
+      "q4": {
+        "question": "Your bust compared with your hips is…",
+        "hint": "Roughly. No measuring.",
+        "a1": "Fuller than my hips",
+        "a2": "About equal",
+        "a3": "Less full than my hips"
+      },
+      "q5": {
+        "question": "Which sounds most familiar?",
+        "hint": "Pick the one you've said, or thought, in a fitting room.",
+        "a1": "Jeans that fit my hips gape at the waist",
+        "a2": "Dresses fit my bust and hips but hang loose at the waist",
+        "a3": "Fitted waistbands are the first thing to feel tight",
+        "a4": "Tops fit my shoulders but swim below",
+        "a5": "Most things fit fairly straight up and down"
+      },
+      "q6": {
+        "question": "A dress with no waist seam usually…",
+        "hint": "Think of a shift or a straight column dress.",
+        "a1": "Hangs straight, which I don't mind",
+        "a2": "Skips my waist entirely",
+        "a3": "Makes my shoulders look broader",
+        "a4": "Sits wide at the hip",
+        "a5": "Is the most comfortable thing I own"
+      }
+    },
+    "outfit": {
+      "unavailable": "One of the selected sizes is sold out. Choose another size or untick that piece.",
+      "error": "We couldn't add the look. Please try again.",
+      "size_for": "Size for {{ product }}",
+      "include": "Include",
+      "summary_heading": "The full look",
+      "count": "{{ count }} pieces",
+      "total": "Total",
+      "add_all": "Add the full look",
+      "empty": "This look has no pieces linked yet."
+    }
   }
 }
